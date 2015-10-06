@@ -1,0 +1,65 @@
+==============================
+Write your own Analysis Engine
+==============================
+
+This tutorial assumes that the reader has created a robosherlock package, and allready run the pipeline as described in the TODO section.
+
+As descriped in the overview (TODO:link) analysis enignes can be either primitive or aggregate. A primitive analysis engine is called an annotator (don't let the name fool you, not all primitive analysis enignes annotate a scene). In the following the creation of a new primitive analysis engine will be described, followed by creating an aggregat AE that uses is.
+
+Create your annotator
+---------------------
+
+Create a descriptor file for you new annotator, in the ``descriptors/annotators`` folder and  call it `MyNewAnnotator.xml`. Add the following content to it::
+    
+	<?xml version="1.0" encoding="UTF-8"?>
+	<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	  <frameworkImplementation>org.apache.uima.cpp</frameworkImplementation>
+	  <primitive>true</primitive>
+	  <annotatorImplementationName>rs_myFirstAnnotator</annotatorImplementationName>
+	  <analysisEngineMetaData>
+	    <name>MyFirstAnnotator</name>
+	    <description/>
+	    <version>1.0</version>
+	    <vendor/>
+	    <configurationParameters>
+	      <configurationParameter>
+	        <name>test_param</name>
+	        <type>Float</type>
+	        <multiValued>false</multiValued>
+	        <mandatory>false</mandatory>
+	      </configurationParameter>
+	    </configurationParameters>
+	    <configurationParameterSettings>
+	      <nameValuePair>
+	        <name>test_param</name>
+	        <value>
+	          <float>0.01</float>
+	        </value>
+	      </nameValuePair>
+	    </configurationParameterSettings>
+	    <typeSystemDescription>
+	      <imports>
+	        <import location="../typesystem/typesDsescriptor.xml"/>
+	      </imports>
+	    </typeSystemDescription>
+	    <capabilities>
+	      <capability>
+	        <inputs/>
+	        <outputs/>
+	        <languagesSupported>
+	          <language>x-unspecified</language>
+	        </languagesSupported>
+      	</capability>
+	    </capabilities>
+	    <operationalProperties>
+	      <modifiesCas>true</modifiesCas>
+	      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+	      <outputsNewCASes>false</outputsNewCASes>
+	    </operationalProperties>
+	  </analysisEngineMetaData>
+	</taeDescription>
+   
+Now in the `src` folder create `MyNewAnnotator.cpp` containing the following code::
+
+    
+
