@@ -79,27 +79,23 @@
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
-  <div style="width: 100% ;height: 138px; background: #EEEEEE; position: relative; z-index: 1; align-elements:center"> <!-- #343131-->
-        {% if logo %}
-          <a href="{{ pathto(master_doc) }}">
-        {% else %}
-          <a href="{{ pathto(master_doc) }}" class="icon icon-home"> {{ project }}
-        {% endif %}
-
-        {% if logo %}
-          {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
-          <img src="{{ pathto('_static/' + logo, 1) }}" class="logo"  style="width: auto; height: 138px;"/>
-          <a href="http://www.uni-bremen.de/en.html"  target="_blank"><img src="{{ pathto('_static/unihb_logo.png', 1) }}" style="opacity: 1; height: 40px; width: auto; left: 850px; position: absolute; top: 83px;"></a>
-          <a href="http://ai.uni-bremen.de"  target="_blank"><img src="{{ pathto('_static/ai_logo.png', 1) }}" style="opacity: 1; height: 40px; width: auto; left: 850px; position: absolute; top: 30px;"></a>
-        {% endif %}
-        </a>
-  </div>
-
+<!--
+<body class="wy-body-for-nav" role="document" style= "align-content:center">
+-->
+<body id = "mainBody">	
   <div class="wy-grid-for-nav">
-
+<header id="pageheader">
+        <div style="width: 100% ;height: 138px; background: #FFFFFF; position: relative; z-index: 1; align-elements:center"> <!-- #343131-->
+          <a href="{{ pathto(master_doc) }}">
+          {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
+          <img src="{{ pathto('_static/logo.png', 1) }}" class="logo"  style="width: auto; height: 138px;"/>
+          <a href="http://www.uni-bremen.de/en.html"  target="_blank"><img src="{{ pathto('_static/unihb_logo.png', 1) }}" style="opacity: 1; height: 40px; width: auto; left: 725px; position: absolute; top: 83px;"></a>
+          <a href="http://ai.uni-bremen.de"  target="_blank"><img src="{{ pathto('_static/ai_logo.png', 1) }}" style="opacity: 1; height: 42px; width: auto; left: 850px; position: absolute; top: 30px;"></a>
+        </a>
+		</div>
+    </header>
     {# SIDE NAV, TOGGLES ON MOBILE #}
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+    <nav class="wy-nav-side" id = "navSide">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           {% block sidebartitle %}
@@ -137,6 +133,7 @@
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           {% block menu %}
+          <h3><a href="{{ pathto(master_doc) }}">{{ _('Table of Contents') }}</a></h3>
             {% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
             {% if toctree %}
                 {{ toctree }}
@@ -149,66 +146,23 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">{{ project }}</a>
-      </nav>
-
-
+    <div class="wy-nav-content-wrap">
       {# PAGE CONTENT #}
-      <div class="wy-nav-content">
+      <div class="wy-nav-content" id="mainContent">
         <div class="rst-content">
           {% include "breadcrumbs.html" %}
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             {% block body %}{% endblock %}
            </div>
+             {% if pagename == 'index' %}
+				{% include "footer.html" %}
+			 {% endif %}
           </div>
-          {% include "footer.html" %}
         </div>
       </div>
-
-    </section>
-
+    </div>
   </div>
-  {% include "versions.html" %}
-
-  {% if not embedded %}
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'{{ url_root }}',
-            VERSION:'{{ release|e }}',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}',
-            HAS_SOURCE:  {{ has_source|lower }}
-        };
-    </script>
-    {%- for scriptfile in script_files %}
-      <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
-    {%- endfor %}
-
-  {% endif %}
-
-  {# RTD hosts this file, so just load on non RTD builds #}
-  {% if not READTHEDOCS %}
-    <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
-  {% endif %}
-
-  {# STICKY NAVIGATION #}
-  {% if theme_sticky_navigation %}
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
-      });
-  </script>
-  {% endif %}
-
-  {%- block footer %} 
-  {% endblock %}
-
+   <script src="{{ pathto('_static/js/myJs.js', 1) }}"></script>
 </body>
 </html>
