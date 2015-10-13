@@ -60,3 +60,7 @@ The *demo.xml*
    </fixedFlow>
 
 A detailed presentation of each component can be found on the ...
+
+Try to add *<node>Cluster3DGeometryAnnotator<node>* before line 137 and relaunch RoboSherlock (no compilation required).
+You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the visual output for the results).
+
