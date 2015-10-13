@@ -3,30 +3,33 @@
 Install and Setup
 =================
 
-Recommended operating system is Ubuntu 14.04 LTS 64bit.
-
-Install **ROS Indigo** (desktop full). Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
+Recommended operating system is Ubuntu 14.04 LTS 64bit. The framew
+RoboSherlock comes as a ROS package, so you will need to install **ROS Indigo** (desktop full). 
+Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
 
 .. _homepage: http://wiki.ros.org/indigo/Installation
 .. _here: http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
-Using these instructions does not guarantee that all components will work out of the box. Please check the :ref:`Overview <overview_rs>` section for more detail.
+These instructions are valid for the core package of RoboSherlock which you can get from the project
+GitHub page: ::
+
+    git clone https://github.com/RoboSherlock/robosherlock
+   
+Check the repository out in your catkin workspace. Before compiling you need to set up the dependencies 
+for the project. 
 
 Get dependencies
 ----------------
 
-- The following packages should be installed::
+The following packages should be installed::
    
-   sudo apt-get install automake libxerces-c-dev libicu-dev openjdk-7-jdk libapr1-dev libgphoto2-2-dev mongodb libhdf5-serial-dev libcppnetlib-dev protobuf-compiler scons
-  
-- Install the necessary ros packages.::
+   sudo apt-get install automake libxerces-c-dev libicu-dev openjdk-7-jdk libapr1-dev libgphoto2-2-dev mongodb libhdf5-serial-dev scons
+
+Install the necessary ros packages.::
 
    sudo apt-get install ros-indigo-openni-camera ros-indigo-openni-launch
 
-- For **ROS Indigo** there is no released rosjava package at the moment. You can install it from source following these instructions_.
-.. _instructions: http://wiki.ros.org/rosjava/Tutorials/indigo/Installation
-
-- get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH::
+Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH::
   
    git clone https://github.com/bbferka/uima-uimacpp.git uimacpp
    cd uimacpp
@@ -37,32 +40,17 @@ Get dependencies
 
 If all went correct *ls /usr/local/lib* will contain *libuima.so*.
 
-- get mongo-cxx-driver and install to /usr/local::
+Get mongo-cxx-driver and install to /usr/local::
    
    git clone https://github.com/mongodb/mongo-cxx-driver.git
    cd mongo-cxx-driver/
    git checkout 26compat 
-   sudo scons --full --use-system-boost --prefix=/usr/local --ssl --sharedclient install-mongoclient
-
-- Get the UIMA Java SDK Binaries. Download and extract latest binaries to a folder of your choice::
-
-   wget http://mirror.softaculous.com/apache//uima//uimaj-2.6.0/uimaj-2.6.0-bin.tar.gz
-   tar -xf uimaj-2.6.0-bin.tar.gz
-	
-- Checkout dependencies in your catkin workspace.::
-
-   git clone https://github.com/code-iai/iai_common_msgs.git
-   git clone https://github.com/code-iai/designator_integration.git
-   git clone https://github.com/code-iai/iai_photo.git
+   sudo scons --full --use-system-boost --prefix=/usr/local --ssl --sharedclient install-mongoclient   
 
 Set up Bash
 -----------
 
-- Put the right paths into your ~/.bashrc. In the following code, replace ''${PATH_TO_UIMA/apache-uima}'' with the location where you extracted the apache-uima lib.::
-
-   export UIMA_HOME=${PATH_TO_UIMA}/apache-uima
-   export UIMA_HOME_LIBS=${UIMA_HOME}/lib	
-   export PATH=${UIMA_HOME}/bin:${PATH}
+Put the right paths into your ~/.bashrc.::
 
    export APR_HOME=/usr
    export ICU_HOME=/usr
@@ -73,9 +61,10 @@ Set up Bash
 
    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
-Doing *ls $UIMA_HOME* should give something like::
-  
-   bin  config  docs  eclipsePlugins  examples  issuesFixed  lib  LICENSE  NOTICE  README  RELEASE_NOTES.html
+You are ready to compile with `catkin_make`. Check out :ref:`pipeline` 
+for details about how to run the a small demo.
 
-You are ready to compile with `catkin_make`
+It is recommended to add the [..]/robosherlock/scripts/ folder to your PATH. This way you can easily access
+some convenience scripts, for e.g. creating a new annotator, or a new ROS package that depends on RoboSherlock.
+
 

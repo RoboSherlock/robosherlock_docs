@@ -22,3 +22,4 @@ the annotations and allows for seamless linking with knowledge-bases and intelli
    install
    documentation
    publications
+   about
