@@ -1,6 +1,6 @@
-=======
+==================================
 Modules and implementation details
-=======
+==================================
 
 * io
 * segmentation

@@ -6,7 +6,7 @@ Running a pipeline in RoboSherlock
 
 
 The demo provided is very simple and is meant to introduce users to the components of the framework, and
-how to use them. Download the provided :download:`sample bag file <./_static/test.bag>`. The bagfile was recorded using 
+how to use them. Download the provided :download:`sample bag file <../_static/test.bag>`. The bagfile was recorded using 
 a PR2 robot and contains a short stream of kinect data, namely the topics: ::
   
     /kinect_head/rgb/image_color/compressed
@@ -31,7 +31,7 @@ You should see the results of the individual annotators in the visualizer window
 for the generated point clouds). 
 Pressing left or right will change the view. You should see an output similar to the one below:
 
-.. image:: imgs/demoResults.png
+.. image:: ../imgs/demoResults.png
   :align: center
 
 The demo is a very simple example of how perception pipelines are defined and run in RoboSherlock. Launching 

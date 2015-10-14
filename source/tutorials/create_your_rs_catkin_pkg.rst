@@ -8,7 +8,7 @@ Make sure you are in the source folder of a catkin workspace and run::
     rosrun robosherlock rs_create_package <package_name>
 
 
-or if you've added the *scripts* folder to your PATH simply run::
+or if you've added the ``scripts`` folder to your PATH simply run::
     
     rs_create_package <package_name>
 
@@ -30,7 +30,6 @@ It edits the *CMakeLists.txt* adding the line::
     update_analysis_engines(descriptors/analysis_engines descriptors/annotators)
 
 which ensures that during compilation the right paths are gonna get set in the aggregate analysis engines(paths for the xml files of the annotators).
-Furthermore it creates an initial descriptor for the typesystem , *typeDescriptors.xml* which imports the exisitng typesystem from the core ``iai_rs_cpp`` package. 
-**IMPORTANT:** Unfortunatelly at the moment the automatic code generation for the typesystem only works if we extend it in the core package. If new types are added to the current package the container classes for the type need to be implemented manually. 
+Furthermore it creates an initial descriptor for the typesystem , *typeDescriptors.xml* which imports the exisitng typesystem from the core ``robosherlock`` package. 
 
 You are now ready to create you first annotator and an analysis engine that uses it.

@@ -28,10 +28,12 @@ The following packages should be installed::
 Install the necessary ros packages.::
 
    sudo apt-get install ros-indigo-openni-camera ros-indigo-openni-launch
+   
+.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are also included in ROS indigo, namely ``OpenCV 2.4.8`` and ``PCL 1.7.2``
 
 Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH::
   
-   git clone https://github.com/bbferka/uima-uimacpp.git uimacpp
+   git clone https://github.com/robosherlock/uima-uimacpp.git uimacpp
    cd uimacpp
    ./autogen.sh
    ./configure --without-activemq --with-jdk=/usr/lib/jvm/java-7-openjdk-amd64/include --prefix=/usr/local --with-icu=/usr
