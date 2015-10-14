@@ -27,6 +27,10 @@ In **UIMA** (Unstructured Information Management Architecture) a processing pipe
 Structure of RoboSherlock
 -------------------------
 
+.. image:: imgs/systemOverview.png
+  :align: center
+  
+  
 There are two important parts of the RoboSherlock project: the code base and the `.xml` definitions of the components.
 
 Structure of the iai_rs_cpp package::

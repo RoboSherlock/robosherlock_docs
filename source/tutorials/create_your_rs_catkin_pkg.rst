@@ -7,7 +7,9 @@ Make sure you are in the source folder of a catkin workspace and run::
 
     rosrun robosherlock rs_create_package <package_name>
 
-or if you've added the script folder to your PATH simply:
+
+or if you've added the *scripts* folder to your PATH simply run::
+    
     rs_create_package <package_name>
 
 The script will create a new catkin package that has the structure needed for Robosherlock.::
