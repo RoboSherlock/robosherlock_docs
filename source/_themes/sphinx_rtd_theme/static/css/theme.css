@@ -906,7 +906,7 @@ font-style:normal
 .wy-inline-validate.wy-inline-validate-warning .wy-input-context:before,
 .wy-inline-validate.wy-inline-validate-info .wy-input-context:before,
 .rst-content .admonition-title:before {
-    content: ""
+    content: ""
 }
 .fa-gift:before {
     content: ""
@@ -2445,7 +2445,7 @@ a .icon {
     padding: 12px;
     line-height: 24px;
     margin-bottom: 24px;
-    background: #e7f2fa
+    background: rgb(184, 200, 203)
 }
 .wy-alert-title,
 .rst-content .admonition-title {
@@ -2511,7 +2511,7 @@ a .icon {
 .rst-content .warning,
 .rst-content .wy-alert-warning.seealso,
 .rst-content .admonition-todo {
-    background: #ffedcc
+    background: #C9C9C9
 }
 .wy-alert.wy-alert-warning .wy-alert-title,
 .rst-content .wy-alert-warning.note .wy-alert-title,
@@ -2538,7 +2538,7 @@ a .icon {
 .rst-content .warning .admonition-title,
 .rst-content .wy-alert-warning.seealso .admonition-title,
 .rst-content .admonition-todo .admonition-title {
-    background: #f0b37e
+    background: #2C5A77
 }
 .wy-alert.wy-alert-info,
 .rst-content .note,
@@ -5188,7 +5188,7 @@ footer span.commit .rst-content tt,
 .rst-content tt.literal,
 .rst-content tt.literal,
 .rst-content code.literal {
-    color: #E74C3C
+    color: #23248F
 }
 .rst-content tt.xref,
 a .rst-content tt,

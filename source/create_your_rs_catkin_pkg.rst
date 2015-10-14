@@ -3,9 +3,12 @@
 Create your own catkin-robosherlock package
 ===========================================
 
-Make sure you are in the source folder of the same catkin workspace as the one of the core RoboSherlock package and run::
+Make sure you are in the source folder of a catkin workspace and run::
 
-    rosrun iai_rs_cpp rs_create_package.sh <package_name>
+    rosrun robosherlock rs_create_package <package_name>
+
+or if you've added the script folder to your PATH simply:
+    rs_create_package <package_name>
 
 The script will create a new catkin package that has the structure needed for Robosherlock.::
 
@@ -14,7 +17,8 @@ The script will create a new catkin package that has the structure needed for Ro
        |-analysis_engines -> xml definitions of aggregate AEs
        |-annotators       -> xml definitions of primitive AEs
        |-typesystem       -> xml deginitions of the typesystem
-          \-allTypes.xml  -> typesystem definition pointing to the typesystem defined in the core package
+          \-all_types.xml -> typesystem definition pointing to the typesystem defined in the core package
+    |-include
     |-src                 -> code base
     |-package.xml         -> catkin package xml   
     |CMakeLists.txt       -> CMake file

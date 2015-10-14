@@ -1,13 +1,11 @@
-.. documentation_rs:
+.. _documentation:
 
-===========================
-Documentation and Tutorials
-===========================
+=============
+Documentation
+=============
 
 .. toctree::
     :maxdepth: 1
     
-    pipeline
-    create_your_own_ae
-    create_your_rs_catkin_pkg  
+    ae_io
     type_system
