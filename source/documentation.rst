@@ -7,5 +7,5 @@ Documentation
 .. toctree::
     :maxdepth: 1
     
-    ae_io
-    type_system
+    documentation/ae_io
+    documentation/type_system

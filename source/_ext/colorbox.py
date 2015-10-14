@@ -62,7 +62,6 @@ class ColorBox(Directive):
         env = self.state.document.settings.env
 #        targetid = 'index-%s' % env.new_serialno('index')
 #        targetnode = nodes.target('', '', ids=[targetid])
-        print self.options
         ad = make_admonition(colorbox_node, self.name, [(self.arguments[0])], self.options,
                              self.content, self.lineno, self.content_offset,
                              self.block_text, self.state, self.state_machine)

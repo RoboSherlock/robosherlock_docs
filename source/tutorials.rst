@@ -8,7 +8,7 @@ Tutorials
 .. toctree::
     :maxdepth: 1
     
-    pipeline
-    create_your_rs_catkin_pkg  
-    create_your_own_ae
+    tutorials/pipeline
+    tutorials/create_your_rs_catkin_pkg  
+    tutorials/create_your_own_ae
     
