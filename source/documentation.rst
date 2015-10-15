@@ -10,3 +10,4 @@ Documentation
     documentation/structure
     documentation/ae_io
     documentation/type_system
+    documentation/add-remove-cas.rst

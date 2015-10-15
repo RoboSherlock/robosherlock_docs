@@ -3,6 +3,8 @@
 Install and Setup
 =================
 
+.. note:: These installation instructions are for the core package of RoboSherlock. This does NOT contain the knowledge-based reasoning mechanisms and the question-answering implemented. These will be released as a separate ROS package, in order to keep dependencies of the core package at a minimum.
+
 Recommended operating system is Ubuntu 14.04 LTS 64bit. The framew
 RoboSherlock comes as a ROS package, so you will need to install **ROS Indigo** (desktop full). 
 Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
@@ -29,7 +31,7 @@ Install the necessary ros packages.::
 
    sudo apt-get install ros-indigo-openni-camera ros-indigo-openni-launch
    
-.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are also included in ROS indigo, namely ``OpenCV 2.4.8`` and ``PCL 1.7.2``
+.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are also included in ROS Indigo and Ubuntu 14.04, namely ``OpenCV 2.4.8`` and ``PCL 1.7.2``
 
 Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH::
   
