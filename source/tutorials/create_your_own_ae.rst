@@ -11,27 +11,35 @@ As descriped in the overview (TODO:link) analysis enignes can be either primitiv
 Create your annotator
 ---------------------
 
-Since, besides the implementation, it is mandatory in the UIM framework to have meta definitions of every component, we have created a small script that makes creating new components a bit faster. Execute::
+Besides the implementation, it is mandatory in the UIM framework to have meta definitions of every component. A small script is available that makes creating new components a bit faster. Execute::
   
   rosrun robosherlock rs_new_annotator rs_test MyFirstAnnotator
 
-which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_test*. It essentially creates an xml meta file in *descriptors/annotators* and a source file in *./src*. In order to compile it you need to add the following two lines in the CMakeLists.txt::
+which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_test*. It creates an xml meta file in *descriptors/annotators* and a source file in *./src*. In order to compile it you need to add the following two lines in the CMakeLists.txt::
 
   rs_add_library(rs_myFirstAnnotator src/MyFirstAnnotator.cpp)
   target_link_libraries(rs_myFirstAnnotator rs_core)
 
-Every component in RoboSherlock is basically a c++ library, that gets loaded during runtime.::
-    
-	<?xml version="1.0" encoding="UTF-8"?>
-	<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
-	  <frameworkImplementation>org.apache.uima.cpp</frameworkImplementation>
+Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and an xml descriptor.
+
+The xml descriptor
+------------------
+
+The first important part in the descriptor is the tag that tells the system where the annotator is implemented:: 
+
 	  <primitive>true</primitive>
 	  <annotatorImplementationName>rs_myFirstAnnotator</annotatorImplementationName>
-	  <analysisEngineMetaData>
-	    <name>MyFirstAnnotator</name>
-	    <description/>
-	    <version>1.0</version>
-	    <vendor/>
+	  
+The value here is the exact name of the library file that is being generated during compilation. Setting the primitive tag to true signals the system that the descriptor is for single module (setting this to true would make it an aggregate analysis engine, one that we use for defining pipelines).
+
+This is followed by meta data of the annotator (name, version a description etc)
+
+  - name of the annotator, that is used to reference it from a pipeline::
+	
+		<name>MyFirstAnnotator</name>
+  
+  - configuration parameters (declaration is separate from parameter settings, since it is not mandatory to define values here. They can be set to optional and defined in the analysis engines)::
+  
 	    <configurationParameters>
 	      <configurationParameter>
 	        <name>test_param</name>
@@ -48,29 +56,28 @@ Every component in RoboSherlock is basically a c++ library, that gets loaded dur
 	        </value>
 	      </nameValuePair>
 	    </configurationParameterSettings>
+	    
+  - path to the type-system(make sure the file actually exists)::
+	    
 	    <typeSystemDescription>
 	      <imports>
-	        <import location="../typesystem/typesDsescriptor.xml"/>
+	        <import location="../typesystem/all_types.xml"/>
 	      </imports>
 	    </typeSystemDescription>
+  
+  - capabilities of the annotator in terms of I/O as defined in the type-system::
+	    
 	    <capabilities>
 	    <capability>
 	        <inputs/>
 	        <outputs/>
-	        <languagesSupported>
-	          <language>x-unspecified</language>
-	        </languagesSupported>
 		</capability>
 	    </capabilities>
-	    <operationalProperties>
-	      <modifiesCas>true</modifiesCas>
-	      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
-	      <outputsNewCASes>false</outputsNewCASes>
-	    </operationalProperties>
-	  </analysisEngineMetaData>
-	</taeDescription>
    
-Now in the `src` folder create `MyFirstAnnotator.cpp` containing the following code::
+The cpp implementation
+----------------------
+
+In the `src` folder `MyFirstAnnotator.cpp` was generated::
     
 	#include <uima/api.hpp>
 
@@ -134,3 +141,42 @@ Now in the `src` folder create `MyFirstAnnotator.cpp` containing the following c
 Now compile it with catkin_make. Let us now go through what we have just done step by step:
 
 To be continued....
+
+Add it to an AE and run
+-----------------------
+
+In the previous toturial we copied over the demo.xml to our poroject. Styart by renaming it to something like *my_demo.xml* so the naming does not collide with the one in the robosherlock package. Open my_demo.xml and add your new annotator to the pipeline by adding a new *<node>* tag in the fixed flow:
+
+.. note:: Notice that during compilation MyFirstAnnotator was added to the  *delegateAnalysisEngineSpecifiers*
+
+Your fixed flow should look something like this now: 
+
+.. code-block:: xml
+   :lineno-start: 133 
+
+   <fixedFlow>
+   <node>CollectionReader</node>
+   <node>ImagePreprocessor</node>
+   <node>MyFirstAnnotator</node>
+   <node>PointCloudFilter</node>
+   <node>NormalEstimator</node>
+   <node>PlaneAnnotator</node>
+   <node>ImageSegmentationAnnotator</node>
+   <node>PointCloudClusterExtractor</node>
+   <node>ClusterMerger</node>
+   <node>ResultAdvertiser</node>
+   </fixedFlow>
+   
+Run the pipeline as described in :ref:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
+
+.. note:: It is recommended to  create you own launch file in the current package. Notice that you have to change the arguments of the ros node in the launch file in order to execute your new pipeline( from demo to my_demo)
+
+.. warning:: The annotators execute in the order they are defined in the fixed flow. Since the demo annotator accesses point clouds it needs to be put after the ImagePreprocessor component, since this is the module that creates the point cloud from the depth and rgb images. 
+
+The output in the terminal should look like this::
+
+   MyFirstAnnotator.cpp(40)[process] process start
+   MyFirstAnnotator.cpp(44)[process] Test param =  0.01
+   MyFirstAnnotator.cpp(47)[process] Cloud size: 307200
+   MyFirstAnnotator.cpp(48)[process] took: 2.37502 ms.
+
