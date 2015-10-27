@@ -3,7 +3,7 @@
 Install and Setup
 =================
 
-.. note:: These installation instructions are for the core package of RoboSherlock. This does NOT contain the knowledge-based reasoning mechanisms and the question-answering implemented. These will be released as a separate ROS package, in order to keep dependencies of the core package at a minimum.
+.. note:: The installation instructions are for the core package of RoboSherlock. This does NOT contain the knowledge-based reasoning mechanisms and the question-answering implemented. These will be released separately, in order to keep dependencies of the core package at a minimum.
 
 Recommended operating system is Ubuntu 14.04 LTS 64bit. The framew
 RoboSherlock comes as a ROS package, so you will need to install **ROS Indigo** (desktop full). 
