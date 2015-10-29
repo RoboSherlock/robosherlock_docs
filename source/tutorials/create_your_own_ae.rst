@@ -1,3 +1,5 @@
+.. _create_your_ae:
+
 ==============================
 Write your own Analysis Engine
 ==============================
@@ -77,19 +79,17 @@ This is followed by meta data of the annotator (name, version a description etc)
 The cpp implementation
 ----------------------
 
-In the `src` folder `MyFirstAnnotator.cpp` was generated::
+`MyFirstAnnotator.cpp` was generated in the ``src`` folder::
     
 	#include <uima/api.hpp>
 
 	#include <pcl/point_types.h>
-	#include <iai_rs/types/all_types.h>
 	//RS
-	#include <iai_rs/scene_cas.h>
-	#include <iai_rs/util/time.h>
-	#include <iai_rs/DrawingAnnotator.h>
+	#include <rs/types/all_types.h>
+	#include <rs/scene_cas.h>
+	#include <rs/utils/time.h>
 
 	using namespace uima;
-
 
 	class MyFirstAnnotator : public Annotator
 	{
@@ -105,47 +105,47 @@ In the `src` folder `MyFirstAnnotator.cpp` was generated::
 	    return UIMA_ERR_NONE;
 	  }
 	
-	  TyErrorId typeSystemInit(TypeSystem const &type_system)
-	  {
-	    outInfo("typeSystemInit");
-	    return UIMA_ERR_NONE;
-	  }
-	
 	  TyErrorId destroy()
 	  {
 	    outInfo("destroy");
 	    return UIMA_ERR_NONE;
 	  }
 	
-	  TyErrorId processWithLock(CAS &tcas, ResultSpecification const &res_spec)
+	  TyErrorId process(CAS &tcas, ResultSpecification const &res_spec)
 	  {
 	    outInfo("process start");
-	    iai_rs::util::StopWatch clock;
-	    iai_rs::SceneCas cas(tcas);
+	    rs::StopWatch clock;
+	    rs::SceneCas cas(tcas);
 	    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_ptr(new pcl::PointCloud<pcl::PointXYZRGBA>);
-	
 	    outInfo("Test param =  " << test_param);
-	
-	    cas.getPointCloud(*cloud_ptr);
+	    cas.get(VIEW_CLOUD,*cloud_ptr);
 	
 	    outInfo("Cloud size: " << cloud_ptr->points.size());
 	    outInfo("took: " << clock.getTime() << " ms.");
 	    return UIMA_ERR_NONE;
 	  }
-	
 	};
 	
 	// This macro exports an entry point that is used to create the annotator.
 	MAKE_AE(MyFirstAnnotator)
 
-Now compile it with catkin_make. Let us now go through what we have just done step by step:
+Implementation of an annotator extends the ``Annotator`` class of the uimacpp library. ``Annotator`` has several virtual methods defined out of which we are overriding the ``initialize``, ``destroy`` and ``process`` functions. Since annotators get compiled into runtime libraries they must end with the ``MAKE_AE(<AnnotName>)`` macro, that exports the entry point.
 
-To be continued....
+The three methods that we overwrite implement the functionalities of the annotator:
+
+	- ``initialize`` : gets called in the constructor of the class. Has the same functionalities as a constructor. We can read in the parameters defined in the xml descriptor here (in the tutorial code this is *test_param*).
+	- ``destroy`` :  It's like a destructor of a class, e.g. deallocate memory, if needed. 
+	- ``process`` :  this is where all the processing code goes. In the tutorial we convert the cas to the SceneCas, get the point cloud that we stored in it and display it's size
+
+.. note:: ``SceneCas`` is a wrapper for the uima::CAS class from uimacpp for conveniently setting and getting data. 
+
+
+You can now compile it with catkin_make.
 
 Add it to an AE and run
 -----------------------
 
-In the previous toturial we copied over the demo.xml to our poroject. Styart by renaming it to something like *my_demo.xml* so the naming does not collide with the one in the robosherlock package. Open my_demo.xml and add your new annotator to the pipeline by adding a new *<node>* tag in the fixed flow:
+In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.xml to our poroject. Start by renaming it to something like *my_demo.xml* so the naming does not collide with the one in the robosherlock package. Open my_demo.xml and add your new annotator to the pipeline by adding a new *<node>* tag in the fixed flow:
 
 .. note:: Notice that during compilation MyFirstAnnotator was added to the  *delegateAnalysisEngineSpecifiers*
 
@@ -167,7 +167,7 @@ Your fixed flow should look something like this now:
    <node>ResultAdvertiser</node>
    </fixedFlow>
    
-Run the pipeline as described in :ref:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
+Run the pipeline as described in :doc:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
 
 .. note:: It is recommended to  create you own launch file in the current package. Notice that you have to change the arguments of the ros node in the launch file in order to execute your new pipeline( from demo to my_demo)
 
