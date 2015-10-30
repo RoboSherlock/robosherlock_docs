@@ -153,7 +153,8 @@ Your fixed flow should look something like this now:
 
 .. code-block:: xml
    :lineno-start: 133 
-
+   :emphasize-lines: 4
+   
    <fixedFlow>
    <node>CollectionReader</node>
    <node>ImagePreprocessor</node>
