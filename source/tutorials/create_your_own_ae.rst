@@ -1,4 +1,4 @@
-.. _create_your_ae:
+.. _create_your_own_ae:
 
 ==============================
 Write your own Analysis Engine
