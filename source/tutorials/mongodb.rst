@@ -109,7 +109,7 @@ Run the modified pipeline, without playing a bagfile now::
 Notice that the execution will continue to loop and never stop. This is because the configuration file for playing back data from the mongo database is set to loop infinitely. You can stop execution by selecting one of the visualizer windows and hit escape, or from the terminal using ``Ctrl+C``. 
 
 Finally you will add a StorageWriter component to ``my_demo.xml`` and write the restuls of the new pipeline into a new database called Scenes_annotated. 
-Start by adding the ``StorageWriter`` component to the pipeline::
+Start by adding the ``StorageWriter`` component to the pipeline:
 
 .. code-block:: xml
    :lineno-start: 133 
