@@ -1,6 +1,7 @@
 .. _type_system:
+
 ============================
 The RoboSherlock Type System
 ============================
 
-Coming soon
+The Type System 
