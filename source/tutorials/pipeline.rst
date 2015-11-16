@@ -27,7 +27,7 @@ Start the bagfile: ::
     
     rosbag play test.bag --loop
    
-You should see the results of the individual annotators in the visualizer windows(one for the colored image and one 
+You should see the results of the individual annotators in the visualizer windows (one for the colored image and one 
 for the generated point clouds). 
 Pressing left or right will change the view. You should see an output similar to the one below:
 

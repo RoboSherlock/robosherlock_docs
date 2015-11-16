@@ -19,10 +19,10 @@ The script will create a new catkin package that has the structure needed for Ro
        |-analysis_engines -> xml definitions of aggregate AEs
        |-annotators       -> xml definitions of primitive AEs
        |-typesystem       -> xml deginitions of the typesystem
-          \-all_types.xml -> typesystem definition
+          |-all_types.xml -> typesystem definition
     |-include
-	   |-package_name     -> include folder
-	      |-types         -> folder for the auto-generated type implementations
+       |-package_name     -> include folder
+          |-types         -> folder for the auto-generated type implementations
     |-src                 -> code base
     |-package.xml         -> catkin package xml   
     |-CMakeLists.txt      -> CMake file
