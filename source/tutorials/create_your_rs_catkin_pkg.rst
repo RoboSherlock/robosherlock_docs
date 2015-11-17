@@ -28,7 +28,7 @@ The script will create a new catkin package that has the structure needed for Ro
     |-CMakeLists.txt      -> CMake file
 
 
-It edits the *CMakeLists.txt*, seting the CMake variables needed for generating code. finding annotations automatically::
+It edits the *CMakeLists.txt*, sets the CMake variables needed for code generation. finding annotations automatically::
 
   ################################################################################
   ## Constants for project                                                      ##

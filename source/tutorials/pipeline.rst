@@ -32,7 +32,9 @@ for the generated point clouds).
 Pressing left or right will change the view. You should see an output similar to the one below:
 
 .. image:: ../imgs/demoResults.png
-  :align: center
+   :align: center
+   :height: 100pc
+   :width: 100pc
 
 The demo is a very simple example of how perception pipelines are defined and run in RoboSherlock. Launching 
 the pipeline happens through running the *run* executable, which takes as parameter the name of 
