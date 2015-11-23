@@ -14,7 +14,9 @@ UIMA
 In **UIMA** (Unstructured Information Management Architecture) a processing pipeline is split in to several expert modules (called *Annotators*) that analyze the raw data and annotate parts of it with numeric or symbolic representations. Running several *Annotators* sequentially results in a rich description of the raw data, enabling reasoning about what the images represent (e.g. what are the regions in the image that could be objects, or a human, or a supporting plane etc.). Important concepts:
 
 CAS
-  The CAS, short for Common Analysis Structure, is the central data structure in **UIMA**. It works like a white-board architecture, at the time of creation it is empty and it gets filled with data during execution time. **IMPORTANT**: The CAS is created every time the pipeline starts and is deleted once every module in the pipeline has finished executing.
+  The CAS, short for Common Analysis Structure, is the central data structure in **UIMA**. It works like a white-board architecture, at the time of creation it is empty and it gets filled with data during execution time. 
+  
+  **IMPORTANT**: The CAS is created every time the pipeline starts and is deleted once every module in the pipeline has finished executing.
 
 Type System
   The Type System is the 'common language' used by the modules in a pipeline. Everything that is added to a CAS needs to have a type defined. For a detailed presentation of the existing types check the :ref:`TypeSystem<type_system>` section. 
