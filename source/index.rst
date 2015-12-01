@@ -25,7 +25,6 @@ RoboSherlock is a common framework for cognitive perception, based on the princi
    
    overview
    install
-   tutorials
-   documentation
+   tutorials 
    publications
    about

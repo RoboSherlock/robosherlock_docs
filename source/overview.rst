@@ -25,13 +25,10 @@ Analysis Engines
   Analysis Engines (**AEs**) are the core processing components in `RoboSherlock`. They can be either primitive or aggregate. In most cases a primitive AE is used to wrap an existing perception algorithm, read input data, produce outputs etc. Aggregate AEs are composed of multiple primitive AEs and in essence they define a perception pipeline. More details about existing AEs and how to write a new AE ...soon to come.
 
 
-Useful Information about RoboSherlock
--------------------------------------
-
-.. image:: imgs/systemOverview.png
-   :align: center
-   :height: 100pc
-   :width: 100pc
+.. .. image:: imgs/systemOverview.png
+..   :align: center
+..   :height: 100pc
+..   :width: 100pc
   
 There are two important parts of the RoboSherlock project: the code base and the `.xml` definitions of the components.
 

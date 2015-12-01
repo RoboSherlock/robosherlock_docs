@@ -1,5 +1,13 @@
 .. about: ..
 
+Support
+=======
+
+Before asking questions please have a look at the tutorials before. For bug reports and feature requests, 
+please open an issue on `github`_.
+
+.. _github: https://github.com/RoboSherlock/robosherlock/issues/new
+
 About
 =====
 
