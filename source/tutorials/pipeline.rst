@@ -61,7 +61,7 @@ The *demo.xml*
    <node>ResultAdvertiser</node>
    </fixedFlow>
 
-A detailed presentation of each component can be found on the :ref:`annotation descriptions <annotators>`
+.. A detailed presentation of each component can be found on the :ref:`annotation descriptions <annotators>`
 
 Try to add *<node>Cluster3DGeometryAnnotator<node>* before line 137 and relaunch RoboSherlock (no compilation required).
 You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the visual output for the results).
