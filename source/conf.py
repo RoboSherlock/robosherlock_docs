@@ -25,10 +25,11 @@ sys.path.append(os.path.abspath('_ext'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinxcontrib.bibtex','colorbox']
+extensions = ['sphinxcontrib.bibtex','colorbox','sphinxcontrib.googleanalytics']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['./_templates']
 
+googleanalytics_id = 'UA-70923908-1'
 # The suffix of source filenames.
 source_suffix = '.rst'
 
