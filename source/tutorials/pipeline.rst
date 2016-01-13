@@ -19,7 +19,7 @@ in the camera configuration files.
     
 Launch the robosherlock demo: ::   
     
-    roslaunch robosherlock rs_demo.launch
+    roslaunch robosherlock rs.launch
     
 The launch file will initialize active components of RoboSherlock and will wait for data to be published on the 
 camera topics.
