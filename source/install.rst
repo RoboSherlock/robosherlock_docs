@@ -21,7 +21,7 @@ Get dependencies
 
 The following packages should be installed: ::
    
-   sudo apt-get install automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons
+   sudo apt-get install automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons openjdk-7-jdk
 
 Install the necessary ros packages: ::
 
