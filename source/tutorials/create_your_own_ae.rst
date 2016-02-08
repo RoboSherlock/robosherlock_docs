@@ -69,12 +69,12 @@ This is followed by meta data of the annotator (name, version a description etc)
   
   - capabilities of the annotator in terms of I/O as defined in the type-system::
 	    
-   <capabilities>
-      <capability>
-            <inputs/>
-            <outputs/>
-          </capability>
-        </capabilities>
+		<capabilities>
+		  <capability>
+		    <inputs/>
+		    <outputs/>
+		  </capability>
+		</capabilities>
    
 The cpp implementation
 ----------------------
