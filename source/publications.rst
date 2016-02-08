@@ -6,6 +6,13 @@ Publications
 
 List of publications describing parts of the system, or relevant to the project.
 
+2016
+----
+
+.. bibliography:: refs.bib
+	:style: plain
+	:filter: year % "2016"
+
 2015
 ----
 
