@@ -20,7 +20,7 @@ Besides the implementation, it is mandatory in the UIM framework to have meta de
 which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_test*. It creates an xml meta file in *descriptors/annotators* and a source file in *./src*. In order to compile it you need to add the following two lines in the CMakeLists.txt::
 
   rs_add_library(rs_myFirstAnnotator src/MyFirstAnnotator.cpp)
-  target_link_libraries(rs_myFirstAnnotator rs_core)
+  target_link_libraries(rs_myFirstAnnotator ${CATKIN_LIBRARIES})
 
 Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and an xml descriptor.
 
