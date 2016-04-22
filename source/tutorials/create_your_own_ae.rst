@@ -4,9 +4,9 @@
 Write your own Analysis Engine
 ==============================
 
-This tutorial assumes that the reader has created a robosherlock package, and allready run the pipeline as described in the TODO section.
+This tutorial assumes that the reader has created a robosherlock package, and already run the pipeline described in the :ref:`first tutorial<pipeline>`.
 
-As descriped in the overview (TODO:link) analysis enignes can be either primitive or aggregate. A primitive analysis engine is called an annotator. In the following the creation of a new primitive analysis engine will be described, followed by creating an aggregat AE that uses is.
+As described in the :ref:`overview<overview_rs>`, analysis engines can be either primitive or aggregate. A primitive analysis engine is called an annotator. In the following the creation of a new primitive analysis engine will be described, followed by creating an aggregate AE that uses is.
 
 .. note:: it is not required that all primitive analysis engines annotate a scene, but for simplicity we call individual experts annotators. E.g. primitive AEs can generate object hypotheses, or have I/O tasks
 

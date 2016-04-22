@@ -91,12 +91,12 @@ Start with changing the interface the CollectionReader uses. This is done by ove
    :emphasize-lines: 5
 
     <nameValuePair>
-        <name>camera_config_files</name>
-        <value>
-          <array>
-            <string>config_mongodb_playback.ini</string>
-          </array>
-        </value>
+      <name>camera_config_files</name>
+      <value>
+        <array>
+          <string>config_mongodb_playback.ini</string>
+        </array>
+      </value>
     </nameValuePair>
 
 
@@ -134,20 +134,20 @@ Now owerwrite the parameter ``storagedb`` from the StorageWriter. Add the follow
 .. code-block:: xml
 
 	<configurationParameter>
-		<name>storagedb</name>
-        <type>String</type>
-        <multiValued>false</multiValued>
-        <mandatory>false</mandatory>
-        <overrides>
-            <parameter>StorageWriter/storagedb</parameter>
-        </overrides>    
-    </configurationParameter>
+	  <name>storagedb</name>
+	  <type>String</type>
+	  <multiValued>false</multiValued>
+	  <mandatory>false</mandatory>
+	  <overrides>
+	    <parameter>StorageWriter/storagedb</parameter>
+	  </overrides>    
+	</configurationParameter>
 
-    <nameValuePair>
-        <name>storagedb</name>
-        <value>
-            <string>Scenes_annotated</string>
-        </value>
-    </nameValuePair>
+	<nameValuePair>
+	  <name>storagedb</name>
+	  <value>
+	    <string>Scenes_annotated</string>
+	  </value>
+	</nameValuePair>
     
 Run the new pipeline and inspect the results in the mongodb. Optionally you can turn off looping in the configuration file, so execution halts once all frames have been processed. You could search for the annotation you had previously created, it will be stored in the scene collection in the annotations array of each identifiable.

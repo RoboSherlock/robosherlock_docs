@@ -111,8 +111,6 @@ Now that a new type has been created, you can start using it from the annotators
         annotation.centroid.set(centroid);
         annotation.clusterId.set(idx++);
         c.annotations.append(annotation);
-        
-        
     }
 
 Don't forget to include the necessary header files::
