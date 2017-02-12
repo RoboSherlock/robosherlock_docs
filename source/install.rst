@@ -29,7 +29,7 @@ Install the necessary ros packages: ::
    
 .. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are also included in ROS Indigo and Ubuntu 14.04, namely ``OpenCV 2.4.8`` and ``PCL 1.7.2``
 
-Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH::
+Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
   
    git clone https://github.com/robosherlock/uima-uimacpp.git uimacpp
    cd uimacpp
@@ -40,12 +40,12 @@ Get *uimacpp* and install to */usr/local* or any other folder that is in your LD
 
 If all went correct */usr/local/lib* will contain *libuima.so*.
 
-Get mongo-cxx-driver (*branch 26compat*) and install to /usr/local::
+Get mongo-cxx-driver (*branch 26compat*) and install to */usr/local*. Under Ubuntu 16.04 use --disable-warnings-as-errors so that you can compile with gcc5+::
    
    git clone https://github.com/mongodb/mongo-cxx-driver.git
    cd mongo-cxx-driver/
    git checkout 26compat 
-   sudo scons --full --use-system-boost --prefix=/usr/local --ssl --sharedclient install-mongoclient   
+   sudo scons --full --use-system-boost --prefix=/usr/local --ssl --sharedclient --disable-warnings-as-errors install-mongoclient   
 
 Set up Bash
 -----------
