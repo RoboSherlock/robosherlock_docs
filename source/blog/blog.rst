@@ -1,5 +1,16 @@
 News and Blog
 =============
+.. colorbox:: 2017.05.29 GOSC17
+
+	 RoboSherlock is participating in this years Google Summer of Code, under the umbrealla of the `Institute for Artificial Intelligence`_.  Mykola Dolhyi and An Le Thai are going to be working on implementing/integrating algorithms for hypotheses generation. We hope to have a successful collaboration during the upcomming months. 
+
+   .. image:: imgs/gsoc.jpg
+       :align: center	
+       :height: 150px
+       :width: 150px
+
+   .. _Institute for Artificial Intelligence: http://ai.uni-bremen.de
+
 .. colorbox:: 2016.04.21 RoboSherlock at ICRA16
    
    Our paper :cite:`balintbe16task` on taskability of perception has been accepted at this years ICRA, in Stockholm, Sweeden. The paper presents an extension to RoboSherlock that allows a tighter coupling between knowledge processing and perception.
