@@ -6,7 +6,7 @@ Logging Results
 
 One particularly useful feature in RoboSherlock is the logging of results and that of the raw data into a database, for later inspection. You will create a new pipeline (aggregate analysis engine) that stores raw data from the bag file in a mongodb, then modify the same AE, to read the data out of the database, process it, and store the results back in the database. 
 
-Start by copying over the ``storage.xml`` AE descriptor from ``{..}/robosherlock/descriptors/analysis_engines/`` to your package (correct folder is descriptors/analysis_engines), and for example rename it to ``dbwriter.xml``. Aternatively you can also modify the ``my_demo.xml`` that you used in the previous tutorials, to have the same pipeline defined as in ``sorage.xml``.
+Start by copying over the ``storage.xml`` AE descriptor from ``{..}/robosherlock/descriptors/analysis_engines/`` to your package (correct folder is descriptors/analysis_engines), and for example rename it to ``dbwriter.xml``. Aternatively you can also modify the ``my_demo.xml`` that you used in the previous tutorials, to have the same pipeline defined as in ``storage.xml``.
 
 .. note:: Copying it in the correct folder is important, since during runtime if the AE you want to run is not in your working directory, it will not be found. Having it in the correct directory, the run script searches for all projects that are dependent on RoboShelrock in your catkin workspace and looks in the ``descriptors/analyisis_engines`` folder to find the AE supplied as a parameter.
 

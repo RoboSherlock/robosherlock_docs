@@ -32,7 +32,7 @@ The first important part in the descriptor is the tag that tells the system wher
 	  <primitive>true</primitive>
 	  <annotatorImplementationName>rs_myFirstAnnotator</annotatorImplementationName>
 	  
-The value here is the exact name of the library file that is being generated during compilation. Setting the primitive tag to true signals the system that the descriptor is for single module (setting this to true would make it an aggregate analysis engine, one that we use for defining pipelines).
+The value here is the exact name of the library file that is being generated during compilation. Setting the primitive tag to true signals the system that the descriptor is for single module (setting this to false would make it an aggregate analysis engine, one that we use for defining pipelines).
 
 This is followed by meta data of the annotator (name, version a description etc)
 
