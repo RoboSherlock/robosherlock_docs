@@ -97,10 +97,10 @@
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav class="wy-nav-side" id = "navSide">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+<!--        <div class="wy-side-nav-search">
           {% block sidebartitle %}
 
-<!--
+
           {% if logo and theme_logo_only %}
             <a href="{{ pathto(master_doc) }}">
           {% else %}
@@ -112,7 +112,7 @@
             <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
           {% endif %}
           </a>
--->
+
 
           {% if theme_display_version %}
             {%- set nav_version = version %}
@@ -129,7 +129,7 @@
           {% include "searchbox.html" %}
 
           {% endblock %}
-        </div>
+        </div-->
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           {% block menu %}

@@ -3,12 +3,16 @@
 About
 =====
 
-Developers and contact:
+RoboSherlock is developed at the `Institute for Artificial Intelligence`_, University of Bremen under the supervision of **Prof. Michael Beetz**.
+
+.. _Institute for Artificial Intelligence: http://ai.uni-bremen.de
+
+Core Developers:
   * Ferenc Balint-Benczedi (balintbe@cs.uni-bremen.de)
-  * Thiemo Wiedemeyer (wiedemeyer@cs.uni-bremen.de)
   * Jan-Hendrik Worch (jworch@cs.uni-bremen.de)
   
-Former Contributors:
+Contributors:
+  * Thiemo Wiedemeyer (wiedemeyer@cs.uni-bremen.de)
   * Nico Blodow
   * Zoltan-Csaba Marton
   * Christian Kerl
