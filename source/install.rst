@@ -5,9 +5,9 @@ Install and Setup
 
 .. note:: The installation instructions are for the core package of *RoboSherlock*. This does **NOT** contain the knowledge-based reasoning mechanisms and the question-answering. These will be released separately, in order to keep dependencies of the core package at a minimum.
 
-The recommended operating system is Ubuntu 14.04 LTS 64bit. *RoboSherlock* comes as a ROS package, so you will need to install **ROS Indigo** (desktop full). Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
+The recommended operating system is Ubuntu 14.04 LTS or Ubuntu 16.04 LTS. *RoboSherlock* comes as a ROS package, so you will need to install **ROS Indigo** (desktop full) or **ROS Kinetic**. Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
 
-.. _homepage: http://wiki.ros.org/indigo/Installation
+.. _homepage: http://wiki.ros.org/ROS/Installation
 .. _here: http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
 These instructions are valid for the core package of RoboSherlock which you can get from the GitHub page: ::
@@ -22,14 +22,11 @@ Get dependencies
 The following packages should be installed: ::
    
    sudo apt-get install automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons openjdk-7-jdk
-
-Install the necessary ros packages: ::
-
-   sudo apt-get install ros-indigo-openni-camera ros-indigo-openni-launch
    
-.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are also included in ROS Indigo and Ubuntu 14.04, namely ``OpenCV 2.4.8`` and ``PCL 1.7.2``
+   
+.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are included in ROS on Ubuntu 14.04 or Ubuntu 16.04. 
 
-Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
+Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks for the header files located in the */usr/lib/jvm/java-8-openjdk-amd64/include/linux* (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
   
    git clone https://github.com/robosherlock/uima-uimacpp.git uimacpp
    cd uimacpp

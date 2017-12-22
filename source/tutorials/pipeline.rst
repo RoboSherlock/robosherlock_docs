@@ -21,8 +21,10 @@ Launch the robosherlock demo: ::
     
     roslaunch robosherlock rs.launch
     
-The launch file will initialize active components of RoboSherlock and will wait for data to be published on the 
-camera topics.
+The launch file will initialize active components of RoboSherlock and will wait for data to be published on the camera topics. The launch files sets some default params (like the analysis engine to run by default). These can be changed through rosparams, e.g.: ::
+
+    roslaunch robosherlock rs.launch ae:=<my_ae_name>
+
 Start the bagfile: ::    
     
     rosbag play test.bag --loop
