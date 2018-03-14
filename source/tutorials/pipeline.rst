@@ -42,9 +42,11 @@ The demo is a very simple example of how perception pipelines are defined and ru
 the pipeline happens through running the *run* executable, which takes as parameter the name of 
 the aggregate analysis engine, in this case demo. The definition of the pipeline is located in 
 *./descriptors/analysis_engines/demo.xml*. The first part of the pipeline 
-definition is **auto-generated during compilation**, and points to the meta definition of all components
-that we are able to run using the current demo.xml. Lines 128-138 are the interesting bit, 
-that define the actual pipeline, that will be executed sequentially.
+definition is **auto-generated during compilation**, and points to the meta definition of all annotator components
+that we are able to run using the current demo.xml. Although during runtime only the definitions of the 
+components that will actually be run are necessarry, it is more convenient to simply have
+all existing annotator be available. The lines in between the *fixedFlow* tag 
+define the actual pipeline, that will be executed sequentially.
 
 The *demo.xml*
 
@@ -65,6 +67,6 @@ The *demo.xml*
 
 .. A detailed presentation of each component can be found on the :ref:`annotation descriptions <annotators>`
 
-Try to add *<node>Cluster3DGeometryAnnotator<node>* before line 137 and relaunch RoboSherlock (no compilation required).
+Try to add *<node>Cluster3DGeometryAnnotator</node>* after the *ClusterMerger* and relaunch RoboSherlock (no compilation required).
 You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the visual output for the results).
 
