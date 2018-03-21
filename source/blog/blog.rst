@@ -1,5 +1,6 @@
 News and Blog
 =============
+
 .. colorbox:: 2017.05.29 GOSC17
 
 	 RoboSherlock is participating in this years Google Summer of Code, under the umbrealla of the `Institute for Artificial Intelligence`_.  Mykola Dolhyi and An Le Thai are going to be working on implementing/integrating algorithms for hypotheses generation. We hope to have a successful collaboration during the upcomming months. 
@@ -23,6 +24,7 @@ News and Blog
 	
 	.. image:: imgs/erf2016_logo.png
 		:align: center
+
 	We are happy to announce that the latest advances of RoboSherlock will be persented at the European Robotics Forum 2016 in Ljubljana, Slovenia, as part of the 'Believing in Robot's Eyes - Robust Observation of Task Relevant Cues' Workshop. 
 
 .. colorbox:: 2015.12.01 - RoboSherlock Released

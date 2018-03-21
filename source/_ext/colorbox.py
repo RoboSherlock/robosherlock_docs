@@ -15,8 +15,6 @@ from docutils import nodes
 from sphinx.locale import _
 from sphinx.environment import NoUri
 from sphinx.util.nodes import set_source_info
-from sphinx.util.compat import Directive
-
 
 import warnings
 
