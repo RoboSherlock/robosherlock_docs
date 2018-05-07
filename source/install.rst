@@ -19,9 +19,11 @@ Check out the repository into your catkin workspace. Before compiling you need t
 Get dependencies
 ----------------
 
-The following packages should be installed: ::
+The following packages should be installed(This will add the RoboSherlock PPA to your software sources): ::
    
-   sudo apt-get install automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons openjdk-7-jdk
+   sudo add-apt-repository ppa:robosherlock/ppa
+   sudo apt-get update
+   sudo apt-get install rapidjson automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons openjdk-7-jdk
    
    
 .. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are included in ROS on Ubuntu 14.04 or Ubuntu 16.04. 
