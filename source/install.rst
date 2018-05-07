@@ -19,6 +19,9 @@ Check out the repository into your catkin workspace. Before compiling you need t
 Get dependencies
 ----------------
 
+Get robosherlock_msgs. This is a ROS package and needs to be checked out in your catkin workspace. ::
+	git clone git@github.com:RoboSherlock/robosherlock_msgs.git
+
 The following packages should be installed(This will add the RoboSherlock PPA to your software sources): ::
    
    sudo add-apt-repository ppa:robosherlock/ppa
