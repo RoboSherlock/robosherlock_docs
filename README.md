@@ -1,5 +1,5 @@
 # rs_docs
-RoboSherlock documentation webpage
+Source of the RoboSherlock project webpage (www.robosherlock.org)
 
 Install dependencies:
   
