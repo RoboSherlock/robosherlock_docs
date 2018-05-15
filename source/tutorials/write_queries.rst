@@ -4,7 +4,11 @@
 Use queries to control the pipeline
 ===================================
 
-This tutorial assumes that the reader has started RoboSherlock, downloaded the bag file available in the :ref:`first tutorial<pipeline>` and loaded the bagfile into the MongoDB as described in the :ref:`tutorial about logging results<mongodb>`. 
+This tutorial assumes that the reader has followed the installation guide, which can be found here :ref:`install_rs`, including the installation of the query-answering dependencies. The reader should also have started RoboSherlock, downloaded the bag file available in the :ref:`first tutorial<pipeline>` and loaded the bagfile into the MongoDB as described in the :ref:`tutorial about logging results<mongodb>`. 
+
+Before using queries in robosherlock, json_prolog needs to be started as follows.::
+
+	roslaunch json_prolog json_prolog.launch _initial_package:=robosherlock_knowrob
 
 RoboSherlock supports querying for certain characteristics, which it will try to perceive in the scene.
 As an example, the user may want to know, whether there are any blue objects in the scene.

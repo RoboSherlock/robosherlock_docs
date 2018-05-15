@@ -20,6 +20,7 @@ Get dependencies
 ----------------
 
 Get robosherlock_msgs. This is a ROS package and needs to be checked out in your catkin workspace. ::
+
 	git clone git@github.com:RoboSherlock/robosherlock_msgs.git
 
 The following packages should be installed(This will add the RoboSherlock PPA to your software sources): ::
@@ -76,3 +77,17 @@ Check out :ref:`pipeline`
 for details about how to run a small demo.
 
 
+Installing and Running the query-answering
+-----------------------------------------
+In order to use the query-answering capabilities of RoboSherlock, the following libraries need to be installed:
+
+
+Knowrob: Follow the official Installation guide for the Knowrob Installation, which can be found on their installation page_.
+
+.. _page: http://www.knowrob.org/installation
+
+Robosherlock_knowrob: Check out the repository into your workspace. ::
+
+   git clone https://github.com/RoboSherlock/robosherlock_knowrob.git
+
+Check out :ref:`write_queries` for details about how to use the query-answering.
