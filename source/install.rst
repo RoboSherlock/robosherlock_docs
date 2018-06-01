@@ -21,7 +21,7 @@ Get dependencies
 
 Get robosherlock_msgs. This is a ROS package and needs to be checked out in your catkin workspace. ::
 
-	git clone https://github.com:RoboSherlock/robosherlock_msgs
+	git clone https://github.com/RoboSherlock/robosherlock_msgs
 
 The following packages should be installed(This will add the RoboSherlock PPA to your software sources): ::
    
