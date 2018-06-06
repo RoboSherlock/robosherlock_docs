@@ -43,6 +43,22 @@ Get *uimacpp* and install to */usr/local* or any other folder that is in your LD
 
 If all went correct */usr/local/lib* will contain *libuima.so*.
 
+ROS package uimacpp installation (from source)::
+First go to src folder of your catkin workspace, and then::
+
+  git clone https://github.com/RoboSherlock/uimacpp_ros.git
+  catkin build
+
+Or you can also use this command from root folder of the workspace, if you don't want to use catkin_tools::
+
+  catkin_make
+
+And then the library is installed under the workspace. For now, the corresponding adapted RoboSherlock can be downloaded by doing::
+
+  git clone -b uima-ros https://github.com/MaidouPP/robosherlock.git
+
+This will lated be migrated into the original RoboSherlock repository after more tests.
+
 Get mongo-cxx-driver (*branch 26compat*) and install to */usr/local*. Under Ubuntu 16.04 use --disable-warnings-as-errors so that you can compile with gcc5+::
    
    git clone https://github.com/mongodb/mongo-cxx-driver.git
