@@ -10,6 +10,7 @@ Current status
 The project is going on track as required by the scope of RoboSherlock on this year GSOC. ::
 
 Two things have been completed: ::
+
 * Implement RSParallelPipelinePlanner that is able to mark execution orderings of annotators based on their required inputs and outputs.
 * Examine UIMACPP code repository, gain a deep level of how a AnalysisEngine execution calls annotators' process.
 
@@ -20,6 +21,7 @@ Underlying models
 ---------------------
 
 This section will explain how RSParallelPipelinePlanner works. RSParallelPipelinePlanner consists of these features: ::
+
 * Small interface as function to query annotator input output data from knowrob and store as std::map of annotator name and pair of input output list.
 * Directed Graph data structure to store dependency info of annotators.
 * Dependencies graph builder.
@@ -34,33 +36,31 @@ Setting up and demo
 
 This assumes that user has installed knowrob, robosherlock_knowrob and robosherlock_msgs. All workspace are sourced and used python catkin build. ::
 
-Compiling: ::
+Compiling::
 
-``
-cd ~/<YOUR_WS>/src
-git clone https://github.com/anindex/robosherlock
-cd robosherlock && git checkout parallelism-dev
-cd ../.. && catkin build
-``
+  cd ~/<YOUR_WS>/src
+  git clone https://github.com/anindex/robosherlock
+  cd robosherlock && git checkout parallelism-dev
+  cd ../.. && catkin build
 
-Setting up: ::
+Setting up::
 
-``
-roscore&
-roslaunch robosherlock rs.launch ae:=demo
-roslaunch json_prolog json_prolog.launch initial_package:=robosherlock_knowrob
-``
+  roscore&
+  roslaunch robosherlock rs.launch ae:=demo
+  roslaunch json_prolog json_prolog.launch initial_package:=robosherlock_knowrob
 
-Demo (user can use any query json message): ::
 
-``
-rosservice call RoboSherlock/query "query: '{\"detect\":{\"color\":\"blue\", \"shape\":\"flat\"}}'"
-``
-User can see orderings info on robosherlock terminal. ::
+Demo (user can use any query json message)::
+
+  rosservice call RoboSherlock/query "query: '{\"detect\":{\"color\":\"blue\", \"shape\":\"flat\"}}'"
+
+
+User can see orderings info on robosherlock terminal.
 
 Considerations
 ---------------------
 
 Some issues need to be solved later (important!): ::
+
 * Annotators need fail safe mechanisms for not causing crash for the pipelines.
 * Some annotators are not satisfied input requirements, for example: ObjectIdentityResolution.
