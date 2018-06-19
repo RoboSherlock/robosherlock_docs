@@ -1,11 +1,10 @@
 .. _install_rs:
+
 =================
 Install and Setup
 =================
 
-.. note:: The installation instructions are for the core package of *RoboSherlock*. This does **NOT** contain the knowledge-based reasoning mechanisms and the question-answering. These will be released separately, in order to keep dependencies of the core package at a minimum.
-
-The recommended operating system is Ubuntu 14.04 LTS or Ubuntu 16.04 LTS. *RoboSherlock* comes as a ROS package, so you will need to install **ROS Indigo** (desktop full) or **ROS Kinetic**. Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
+The recommended operating system is Ubuntu 16.04 LTS. *RoboSherlock* comes as a ROS package, so you will need to install **ROS Kinetic** (desktop full). Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_. Ubuntu 14.04 will still work, but as of now it is considered to be deprecated and support will stop soon. 
 
 .. _homepage: http://wiki.ros.org/ROS/Installation
 .. _here: http://wiki.ros.org/catkin/Tutorials/create_a_workspace
@@ -23,14 +22,14 @@ Get robosherlock_msgs. This is a ROS package and needs to be checked out in your
 
 	git clone https://github.com/RoboSherlock/robosherlock_msgs
 
-The following packages should be installed(This will add the RoboSherlock PPA to your software sources): ::
+The following packages should be installed (this will add the RoboSherlock PPA to your software sources): ::
    
    sudo add-apt-repository ppa:robosherlock/ppa
    sudo apt-get update
-   sudo apt-get install rapidjson automake libxerces-c-dev libicu-dev libapr1-dev mongodb scons openjdk-7-jdk
+   sudo apt-get install rapidjson automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk ros-kinetic-libmongocxx-ros
    
    
-.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are included in ROS on Ubuntu 14.04 or Ubuntu 16.04. 
+.. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are included in ROS on Ubuntu 14.04 or Ubuntu 16.04. We also use C++11 features which might require compiling certain dependencies with C++11 support (e.g. libmongocxx-ros on 14.04)
 
 Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks for the header files located in the */usr/lib/jvm/java-8-openjdk-amd64/include/linux* (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
   
@@ -43,28 +42,19 @@ Get *uimacpp* and install to */usr/local* or any other folder that is in your LD
 
 If all went correct */usr/local/lib* will contain *libuima.so*.
 
-ROS package uimacpp installation (from source)::
+Experimental for 16.04: ROS package uimacpp installation (from source):
+-----------------------------------------------------------------------
+
 First go to src folder of your catkin workspace, and then::
 
   git clone https://github.com/RoboSherlock/uimacpp_ros.git
-  catkin build
 
-Or you can also use this command from root folder of the workspace, if you don't want to use catkin_tools::
-
-  catkin_make
-
-And then the library is installed under the workspace. For now, the corresponding adapted RoboSherlock can be downloaded by doing::
+For now, the corresponding adapted RoboSherlock can be downloaded by doing::
 
   git clone -b uima-ros https://github.com/MaidouPP/robosherlock.git
 
-This will lated be migrated into the original RoboSherlock repository after more tests.
+Pending a pull request and more thorough tests this will be incorproated in the main repo soon. 
 
-Get mongo-cxx-driver (*branch 26compat*) and install to */usr/local*. Under Ubuntu 16.04 use --disable-warnings-as-errors so that you can compile with gcc5+::
-   
-   git clone https://github.com/mongodb/mongo-cxx-driver.git
-   cd mongo-cxx-driver/
-   git checkout 26compat 
-   sudo scons --full --use-system-boost --prefix=/usr/local --ssl --sharedclient --disable-warnings-as-errors install-mongoclient   
 
 Set up Bash
 -----------
@@ -77,16 +67,12 @@ Put the right paths into your ~/.bashrc.::
 
    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
-It is recommended to add the [..]/robosherlock/scripts/ folder to your PATH. This way you can easily access
-some convenience scripts, for e.g. creating a new annotator, or a new ROS package that depends on RoboSherlock.
+It is recommended to add the [..]/robosherlock/scripts/ folder to your PATH. This way you can easily access some convenience scripts, for e.g. creating a new annotator, or a new ROS package that depends on RoboSherlock.
 
 Compilation
 -----------
 
-You can either use `catkin_make` or the *rsmake* build script provided in *robosherlock/scripts/* to compie robosherlock (and the rest of your workspace). Passing one of *deb, reb, rel* will build your catkin workspace in debug, release with debug symbols or release.
-
-.. symbolic link info for having the different builds in parallel and activating the one or the other using rsmake xxx
-
+You can either use `catkin_make` or catkin tools to compie robosherlock (and the rest of your workspace). 
 
 
 Check out :ref:`pipeline` 
@@ -94,15 +80,15 @@ for details about how to run a small demo.
 
 
 Installing and Running the query-answering
------------------------------------------
-In order to use the query-answering capabilities of RoboSherlock, the following libraries need to be installed:
+------------------------------------------
 
+In order to use the query-answering capabilities of RoboSherlock, the following libraries need to be installed:
 
 Knowrob: Follow the official Installation guide for the Knowrob Installation, which can be found on their installation page_.
 
 .. _page: http://www.knowrob.org/installation
 
-Robosherlock_knowrob: Check out the repository into your workspace. ::
+robosherlock_knowrob: Check out the repository into your workspace. ::
 
    git clone https://github.com/RoboSherlock/robosherlock_knowrob
 

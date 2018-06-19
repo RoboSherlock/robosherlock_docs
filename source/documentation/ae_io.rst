@@ -7,20 +7,13 @@
 Analysis Engines can have inputs and outputs defined. This help reasoning about the components needed for a perceptual task.
    
 .. colorbox:: Cluster3DGeometryAnnotator
-    
-   Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-   Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
    
    * input:  rs.scene.Cluster
    * output: rs.annotation.Geometry
 	
 .. colorbox:: ClusterColorHistogramCalculator
 
-	hova irok cuccokat?
-
 .. colorbox:: FeatureAnnotator
-
-	s meg mindig nem megy
 
 .. colorbox:: PrimitiveShapeAnnotator
 

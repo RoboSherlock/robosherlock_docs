@@ -15,4 +15,4 @@ Tutorials
     tutorials/mongodb
     tutorials/write_queries
     tutorials/query_interface
-    tutorials/python_annotator    
+..    tutorials/python_annotator    
