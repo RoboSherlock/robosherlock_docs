@@ -1,0 +1,14 @@
+Guide for adding blog entries:
+------------------------------
+
+
+- entries should be added to the blog_entries folder in a file called YYYY-MM-DD.rst, using the ..colorbox restful command (for an example see existing entries)
+
+- if it's the case, multiple entries can be added to the same file
+
+- media files go in the imgs folder.
+
+- every blog entry needs to be sent as a pull request;
+
+- for GSOC: top right corner of entry should contain the name of the student;
+

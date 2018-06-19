@@ -1,0 +1,3 @@
+.. colorbox:: 2015.12.01 - RoboSherlock Released
+
+   The core implementation of RoboSherlock is now available as an open-source ROS package. Details about installation and getting started on the documentations web-page.

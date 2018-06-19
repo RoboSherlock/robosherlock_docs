@@ -1,0 +1,6 @@
+.. colorbox:: 2016.04.21 RoboSherlock at ICRA16
+   
+   Our paper :cite:`balintbe16task` on taskability of perception has been accepted at this years ICRA, in Stockholm, Sweeden. The paper presents an extension to RoboSherlock that allows a tighter coupling between knowledge processing and perception.
+   
+   .. youtube:: NkNHw6qGb3A
+	  :height: 300px
