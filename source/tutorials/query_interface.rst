@@ -20,14 +20,7 @@ The detection query should have the following structure:
 
 The keys can currently take the following values: ::
 
-	shape
-	size
-	color
-	type
-	class
-	cad-model
-	contains
-	volume
+	shape, size, color, type, class, cad-model, contains, volume
 
 The functionality of these keys is defined in ``config/filter_config.ini``.
 

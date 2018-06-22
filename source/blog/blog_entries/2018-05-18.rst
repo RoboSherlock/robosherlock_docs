@@ -1,0 +1,5 @@
+.. colorbox:: 2018.05.18 GOSC'18
+
+	 We are happy to announce that the `Institute for Artificial Intelligence`_ has been accepted as a mentoring organization for this years Google Summer of Code. Three students will be actively working on improoving the RoboSherlock framework.  An Le Thai, will implement functionalities for CAS splitting and merging as well as different strategies for these, while also looking into paralelle execution of AEs. Shingo Kitagawa will be investigating ways of implementing annotators in native Python code, and integrating deep learning approaches. Shixin Li will look into modernizing the uimacpp library and releasing it as a ROS package, paving the way for a future release of the RoboSherlock framework as a binary package. We wish them all success for the upcomming months.  
+
+   .. _Institute for Artificial Intelligence: http://ai.uni-bremen.de
