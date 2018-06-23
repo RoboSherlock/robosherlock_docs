@@ -1,0 +1,36 @@
+.. colorbox:: 2018.06.22 RSParallelPipelinePlanner                                      GSOC'18: An T. Le
+
+   Introduction
+   ---------------------
+
+   The project is going on track as required by the scope of RoboSherlock on this year GSOC. ::
+
+   Two things have been completed: ::
+
+   * Implement RSParallelPipelinePlanner that is able to mark execution orderings of annotators based on their required inputs and outputs.
+   * Examine UIMACPP code repository, gain a deep level of how a AnalysisEngine execution calls annotators' process.
+
+   All implementation so far does not require new dependencies. ::
+
+   Approaches
+   ---------------------
+
+   RSParallelPipelinePlanner planning approach is according to the flow: ::
+
+   1. Query annotator input output data from knowrob and store as std::map of annotator name and pair of input output list.
+   2. Build dependency graph from input output requirements of each annotator as Directed Graph
+   3. Generate annotator orderings marker based on the designed graph traveling algorithm.
+   4. Refine orderings to treat standalone annotators to execute last.
+
+   At current state, RSParallelPipelinePlanner works closely with RSControledAnalysisEngine. When a query is posted, the planner is triggered to query input output requirements of new pipeline annotator list. It then build dependency graph and run ordering marker, the pipeline structure is finally extracted from the markers.
+   This model is foundation for next phase implementation of parallel annotators' execution.
+
+   Results
+   ---------------------
+
+   Executing query ``{"detect":{"color":"red", "shape":"flat"}}`` will produce the result below:
+
+   .. image:: imgs/orderings.png
+       :align: center
+       :height: 300px
+       :width: 150px
