@@ -1,0 +1,7 @@
+.. colorbox:: 2018.06.22 GOSC'18 - Shixin Li - First Month Work
+
+   For the first month as a GSoCer in the `Institute for Artificial Intelligence`_ , my work is mainly in converting the existing `uima-cpp project <https://github.com/RoboSherlock/uima-uimacpp>`_ , which is built with autotools, to a CMake/ROS-build `project <https://github.com/RoboSherlock/uimacpp_ros>`_. 
+
+   To be more specific, I wrote new CMake-related scripts and ros-related configuration files, such as package.xml for uima-ros project and got rid of dependency of all the autotools scripts. Meanwhile, I also modified the Robosherlock CMake-related files so as to integrate with the new UIMA-ros project, to make sure the new RS can include and link to uima-ros headers and libraries as before. After test, this part is regarded as completed, and ready to be released as a debian package.
+
+   .. _Institute for Artificial Intelligence: http://ai.uni-bremen.de
