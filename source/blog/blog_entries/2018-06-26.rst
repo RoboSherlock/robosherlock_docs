@@ -1,0 +1,37 @@
+.. colorbox:: 2018.06.26 Implement Python Annotators GSoC'18: Shingo Kitagawa
+
+    **Introduction**
+    
+    This project is Google Summer of Code(GSoC) 2018 program by Shingo Kitagawa.
+    The GSoC project and proposal page is `here <gsoc2018pythonannotar>`_.
+    
+    Two thing below is done:
+    
+    * Run Python code with boost:python and boost:numpy from C++ annotator.
+    
+    * Implement Faster-RCNN annotator with Python library Chainer. 
+    
+    .. _gsoc2018pythonannotar: https://summerofcode.withgoogle.com/dashboard/project/4651529278062592/overview/
+    
+    **Approaches**
+    
+    The project is on progress as the flow below:
+    
+    1. Run Python code with boost:python and boost:numpy from C++ annotator.
+    2. Implement various annotators with Python library Chainer. 
+    3. Collect dataset and train models for kitchen task with PR2.
+    4. Formatize python template and make build system for Python annotators.
+    5. Run kitchen demo with PR2 in the real environment. 
+    
+    Now, I'm on the 2nd and 3rd stage of the flow.
+    The trained model with VOC dataset is not suitable for kitchen task with PR2,
+    so I decided to train new model with kitchen dataset.
+    After the training the model, I will make a template and build system for python
+    annotators and execute kitchen experiments with PR2.
+    
+    **Results**
+    
+    I implemented Faster-RCNN object detection annotator.
+    The result is shown as below.
+    
+    .. image:: ../imgs/faster_rcnn_robosherlock.png
