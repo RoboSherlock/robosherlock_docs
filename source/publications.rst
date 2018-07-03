@@ -6,26 +6,40 @@ Publications
 
 List of publications describing parts of the system, or relevant to the project.
 
+2018
+----
+
+.. bibliography:: refs.bib
+	:style: plain 
+	:filter: year and ( year == "2018")
+        :labelprefix: 2018-
+
 2017
 ----
 
 .. bibliography:: refs.bib
 	:style: plain
+        :start: continue
 	:filter: year and ( year == "2017")
+        :labelprefix: 2017-
 
 2016
 ----
 
 .. bibliography:: refs.bib
 	:style: plain
+        :start: continue
 	:filter: year and ( year == "2016")
+        :labelprefix: 2016-
 
 2015
 ----
 
 .. bibliography:: refs.bib
 	:style: plain
+        :start: continue
 	:filter: year and ( year == "2015")
+        :labelprefix: 2015-
 
 2014
 ----
@@ -33,3 +47,5 @@ List of publications describing parts of the system, or relevant to the project.
 .. bibliography:: refs.bib
 	:style: plain
 	:filter: year and ( year == "2014")
+        :start: continue
+        :labelprefix: 2014-

@@ -3,15 +3,13 @@
     **Introduction**
     
     This project is Google Summer of Code(GSoC) 2018 program by Shingo Kitagawa.
-    The GSoC project and proposal page is `here <gsoc2018pythonannotar>`_.
+    The GSoC project and proposal page is `here <https://summerofcode.withgoogle.com/dashboard/project/4651529278062592/overview>`_.
     
     Two thing below is done:
     
     * Run Python code with boost:python and boost:numpy from C++ annotator.
     
     * Implement Faster-RCNN annotator with Python library Chainer. 
-    
-    .. _gsoc2018pythonannotar: https://summerofcode.withgoogle.com/dashboard/project/4651529278062592/overview/
     
     **Approaches**
     
@@ -35,3 +33,6 @@
     The result is shown as below.
     
     .. image:: ../imgs/faster_rcnn_robosherlock.png
+ 	:align: center
+        :height: 100pc
+        :width: 100pc
