@@ -1,0 +1,40 @@
+.. colorbox:: 2018.07.08 RSParallelAnalysisEngine GSOC'18: An T. Le
+
+   **Introduction**
+
+   The project is going on track as required of second evaluation of GSOC2018. ::
+
+   Two things have been completed:
+
+   * Implement RSParallelAnalysisEngine that executes parallel pipeline based on the execution model as RSParallelPipelinePlanner outputs.
+   * Port RSParallelAnalysisEngine to RSControledAnalysisEngine including setPipelineOrdering, resetPipelineOrdering, etc functionalities.
+
+   All implementation so far does not require new dependencies.
+
+   **Approaches**
+
+   RSParallelAnalysisEngine not only reserves core pipeline handling features by inheriting from uima::AggregatedEngine, but also expands pipeline handler to parallelism.
+   Everytime pipeline xml file is loaded or setPipelineOrdering function in RsPipelineManager is called, it invokes RSParallelPipelinePlanner to query annotator dependencies from knowrob and then uses
+   uses parallel pipeline orderings to begin pipeline execution. The parallel pipeline execution is implemented as following algorithm: ::
+
+      L - list of orderings
+      function parallelOrderingProcess
+      begin
+      for each ordering O in list L:
+        for each annotator Ai in O:
+          Ti = start thread calling PrimitiveEngine process (return error Ti);
+        lock until all Ti of O has been returned;
+
+        for each Ti in O:
+          if Ti != UIMA_ERROR_NONE:
+            print stack traces;
+            system exit with error;
+      end
+
+   RSParallelAnalysisEngine uses std::async and std::promise as its core components of implementation.
+
+   **Results**
+
+   The parallel pipeline execution result is hard to demonstrate. Please clone my repo: https://github.com/anindex/robosherlock/tree/parallelism-dev and compile it.
+   Then run this command ``roslaunch robosherlock rs.launch ae:=demo wait:=false parallel:=true``.
+   I have noticed the performance issues of parallel pipeline execution due to std::promise bottleneck (avg execute time is worse than linear execution), I am actively investigating the root causes.
