@@ -1,0 +1,9 @@
+.. colorbox:: 2018.07.09 GOSC'18 - Shixin Li - Second Month Work
+
+   For the second month as a GSoCer in the `Institute for Artificial Intelligence`_ , I worked on the second phase of the project, which is adding proper error handler into uimacpp_ros so as to make debugging easier when something's wrong. Original uimacpp usually just crashes and gives segfault, which is almost useless for programmers.  
+
+   Firstly I tried to figure out some pretty frequent errors, including name typo of Analysis Engine, name typo of methods in fixed flow, missed annotator implementation name, mismatched parameter type and name clash of parameters. I finished the first four error checkings and tested if uimacpp or robosherlock already gives enough information. For name typo in fixed flow, it only gives segfault so I looked into uimacpp side and located where the program crashes, added explicit error messages to indicate the absence. For name clash, there is more work to be done.
+
+   Also, I further completed the migration of uimacpp to the ROS version, as well as for robosherlock. I re-investigated the original autotool configurations and made the new CMake configurations consistent as the counterpart. By doing this, I solved the process crash problem when operating with database. This pull request is finally merged into robosherlock master branch, and ready to be released in the hopefully near future.
+
+   .. _Institute for Artificial Intelligence: http://ai.uni-bremen.de
