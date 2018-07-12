@@ -1,0 +1,50 @@
+.. colorbox:: 2018.07.12 Implement Python Annotators GSoC'18: Shingo Kitagawa
+
+    **Introduction**
+    
+    This project is Google Summer of Code(GSoC) 2018 program by Shingo Kitagawa.
+    The GSoC project and proposal page is `here <https://summerofcode.withgoogle.com/dashboard/project/4651529278062592/overview>`_.
+    
+    Two thing below is done in the second period:
+    
+    * Implement SSD detection annotator with Python library Chainer.
+
+    * Implement FCIS instance segmentation annotator with Python library Chainer.
+  
+    * Annotate deep learning network output properly. 
+
+    **Approaches**
+    
+    The project is on progress as the flow below:
+    
+    1. Run Python code with boost:python and boost:numpy from C++ annotator.
+    2. Implement various annotators with Python library Chainer. 
+    3. Collect dataset and train models for kitchen task with PR2.
+    4. Formatize python template and make build system for Python annotators.
+    5. Run kitchen demo with PR2 in the real environment. 
+    
+    Now, I'm on 3rd and 4th stage of the flow.
+    I trained SSD model with `Epic Kitchens Dataset <https://epic-kitchens.github.io/2018>`_,
+    but the dataset is captured mainly from first person view
+    and contains small variety of object items (`My training repository <https://github.com/knorth55/chainer-epic-kitchens>`_).
+    Therefore, I need to train with another dataset for kitchen task.
+    I will make a template and build system for python annotators and execute kitchen experiments with PR2.
+    
+    **Results**
+
+    I implemented SSD detection annotator and FCIS instance segmentation annotator.
+    The result are shown as below.
+    
+    .. image:: ../imgs/ssd_robosherlock.png
+ 	:align: center
+        :height: 100pc
+        :width: 100pc
+
+    .. image:: ../imgs/fcis_robosherlock.png
+ 	:align: center
+        :height: 100pc
+        :width: 100pc
+
+    **Tutorials**
+
+    Tutorial page of my GSoC project: :ref:`gsoc_python_annotator`.
