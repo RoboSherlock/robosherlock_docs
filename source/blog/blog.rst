@@ -1,6 +1,8 @@
 News and Blog
 =============
 
+.. include:: blog_entries/2018-08-11.rst
+
 .. include:: blog_entries/2018-07-12.rst
 
 .. include:: blog_entries/2018-07-08.rst
