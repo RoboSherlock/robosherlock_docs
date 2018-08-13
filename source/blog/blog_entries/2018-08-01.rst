@@ -1,0 +1,32 @@
+.. colorbox:: 2018.08.01 Final blog of GSOC'18: An T. Le
+
+   **Summary**
+
+   The project "Flexible perception pipeline manipulation for RoboSherlock" is at its final stage. ::
+
+   Two things have been completed:
+
+   * Finalize RSAggregatedAnalysisEngine (can be operated in linear or parallel) and port it to current pipeline execution implementation of Robosherlock.
+   * Refactoring symmetry segmentation pipeline code from GSOC 2017, add some failsafe mechanisms and make the symmetry pipeline work in parallel.
+
+   All implementation so far does not require new dependencies.
+
+   **Future development**
+
+   These are points that need to be designed and implemented in the near future for RSAggregatedAnalysisEngine to be more reliable:
+
+   * Implement failsafe mechanisms in all annotators of Robosherlock so that the pipeline will not crash and better handling errors.
+   * Scrub dependency chain of annotators of robosherlock_knowrob for the RSParallelPipelinePlanner to plan correct parallel pipeline structure
+   * symmetry segmentation pipeline needs redesign to work with the rest of Robosherlock as it currently only work on non-NAN clouds.
+
+   Some important bugs has discovered so far:
+
+   * weird callbackKey issues in Visualizer of RoboSherlock
+   * unit tests shutdown incorrectly (deadlock issues)
+
+   **Results**
+   
+   Please clone my repo: https://github.com/anindex/robosherlock/tree/parallelism-dev and compile it.
+   Then run this command ``roslaunch robosherlock rs.launch ae:=demo wait:=false parallel:=true``.
+   The parallel pipeline execution has successfully reduce the runtime of any pipelines: high frequency or expensive computation. It bypasses runtime of annotators in the same ordering,
+   the total time of each ordering is the longest process time of annotators in that ordering.
