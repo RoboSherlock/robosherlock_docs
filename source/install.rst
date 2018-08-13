@@ -20,6 +20,7 @@ Get dependencies
 
 Get robosherlock_msgs. This is a ROS package and needs to be checked out in your catkin workspace. ::
 
+	git clone https://github.com/RoboSherlock/uimacpp_ros
 	git clone https://github.com/RoboSherlock/robosherlock_msgs
 
 The following packages should be installed (this will add the RoboSherlock PPA to your software sources): ::
@@ -31,30 +32,16 @@ The following packages should be installed (this will add the RoboSherlock PPA t
    
 .. warning:: RoboSherlock heavily depends on algorithms implemented in OpenCV and PCL. For the current release we used the default versions that are included in ROS on Ubuntu 14.04 or Ubuntu 16.04. We also use C++11 features which might require compiling certain dependencies with C++11 support (e.g. libmongocxx-ros on 14.04)
 
-Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks for the header files located in the */usr/lib/jvm/java-8-openjdk-amd64/include/linux* (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
-  
-   git clone https://github.com/robosherlock/uima-uimacpp.git uimacpp
-   cd uimacpp
-   ./autogen.sh
-   ./configure --without-activemq --with-jdk=/usr/lib/jvm/java-7-openjdk-amd64/include --prefix=/usr/local --with-icu=/usr
-   make
-   sudo make install
-
-If all went correct */usr/local/lib* will contain *libuima.so*.
-
-Experimental for 16.04: ROS package uimacpp installation (from source):
------------------------------------------------------------------------
-
-First go to src folder of your catkin workspace, and then::
-
-  git clone https://github.com/RoboSherlock/uimacpp_ros.git
-
-For now, the corresponding adapted RoboSherlock can be downloaded by doing::
-
-  git clone -b uima-ros https://github.com/MaidouPP/robosherlock.git
-
-Pending a pull request and more thorough tests this will be incorproated in the main repo soon. 
-
+.. Get *uimacpp* and install to */usr/local* or any other folder that is in your LD_LIBRARY_PATH and PATH. Uimacpp expects the Java headers in */usr/lib/jvm/java-[version]-openjdk-amd64/include*, so depending on your OS you might need to create symlinks for the header files located in the */usr/lib/jvm/java-8-openjdk-amd64/include/linux* (i.e. java 7 and 6 come with symlinks 8 and 9 don't). In the command below replace the version of OpenJdk with the one you have installed::
+..  
+..   git clone https://github.com/robosherlock/uima-uimacpp.git uimacpp
+..   cd uimacpp
+..   ./autogen.sh
+..   ./configure --without-activemq --with-jdk=/usr/lib/jvm/java-7-openjdk-amd64/include --prefix=/usr/local --with-icu=/usr
+..   make
+..    sudo make install
+.. 
+.. If all went correct */usr/local/lib* will contain *libuima.so*.
 
 Set up Bash
 -----------
