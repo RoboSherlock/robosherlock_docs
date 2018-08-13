@@ -1,0 +1,22 @@
+.. colorbox:: 2018.08.11 Implement Python Annotators GSoC'18: Shingo Kitagawa
+
+    **Introduction**
+    
+    This project is Google Summer of Code(GSoC) 2018 program by Shingo Kitagawa.
+    The GSoC project and proposal page is `here <https://summerofcode.withgoogle.com/dashboard/project/4651529278062592/overview>`_.
+    
+    Two thing below is done in the second period:
+    
+    * Implement Mask-RCNN instance segmentation annotator with Python library Chainer.
+
+    * Train various deep learning model with large dataset. 
+
+    This project is completed as GSoC project as belows:
+    
+    1. Run Python code with boost:python and boost:numpy from C++ annotator.
+    2. Implement various annotators with Python library Chainer. 
+    3. Train models for kitchen task with large dataset (Epic Kitchen Dataset, COCO).
+
+    **Tutorials**
+
+    Tutorial page of my GSoC project: :ref:`gsoc_python_annotator`.
