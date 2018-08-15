@@ -1,4 +1,4 @@
-.. colorbox:: 2018.07.09 GOSC'18 - Shixin Li - Second Month Work
+.. colorbox:: 2018.07.09 GSoC'18 - Shixin Li - Second Month Work
 
    For the second month as a GSoCer in the `Institute for Artificial Intelligence`_ , I worked on the second phase of the project, which is adding proper error handler into uimacpp_ros so as to make debugging easier when something's wrong. Original uimacpp usually just crashes and gives segfault, which is almost useless for programmers.  
 

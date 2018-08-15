@@ -1,0 +1,13 @@
+.. colorbox:: 2018.08.15 GSoC'18 - Shixin Li - Third Month Work 
+
+For the third month, my work is to finish the error investigation, modified RoboSherlock and uimacpp_ros so that they accept YAML-based inputs from user. Followings are what I have done:
+
+* Migrated some of the XML-based annotator inputs to YAML-based ones.
+
+* Added a YAML to XML converter, and a XML parser adapted for RoboSherlock, which inherits from uimacpp_ros. Also, instead of using auto-generated delegate engine list in analysis engine XML file, we decided to parse only the annotators in the fixed flow part, and then manually add those delegate engines into the DOM structure.
+
+* Modified uimacpp_ros and created a new analysis engine builder, which enforces the order of first parsing delegate engine, so as to avoid parsing metadata first (which will cause lack of information and thus crash the program).
+
+After the new changes, the XML annotator files generated from YAML input will reside under .ros folder. For now, RoboSherlock also accepts XML inputs. 
+
+For the summary of this three months, you can find my report `here <https://gist.github.com/MaidouPP/36370d985431ef93d9085604cd640b8b>`_. This three-month Google Summer of Code program is an awesome journey of exploring, learning and coding. In the future, I wish I will have the opportunity to use RoboSherlock in my research.
