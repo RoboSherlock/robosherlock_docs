@@ -15,4 +15,5 @@ Tutorials
     tutorials/mongodb
     tutorials/write_queries
     tutorials/query_interface
+    tutorials/ease_fall_school_2018.rst
 ..    tutorials/python_annotator    

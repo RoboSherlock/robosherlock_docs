@@ -1,4 +1,5 @@
 .. _create_your_rs_catkin_pkg:
+
 ===========================================
 Create your own catkin-robosherlock package
 ===========================================
@@ -43,17 +44,14 @@ It edits the *CMakeLists.txt*, sets the CMake variables needed for code generati
   ################################################################################
   ## Update analysis engines, typesystem and include all relevant files         ##
   ################################################################################
-  ##Update xml list of annotators inside analysis engines
-  update_analysis_engines(robosherlock)
+  
   ## generate classes from the typesystem xml files
   generate_type_system(robosherlock)
   #find all relevant files
   find_additional_files()
 
-
 The first part sets the five CMake variables that are in turned used by the scripts that are called in the second part. 
 	
-	* update_analysis_engines: checks if there are new annotators defined in the current package and any package that depends on RoboSherlock and is given as a parameter and adds the relative path of these to the analysis engines defined in our current package
 	* generate_type_system: checks if we have newly defined types in the xml descriptions and generates the C++ container classes for them
 	
 You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. To see the effect of the scripts, try copying over an analysis engine from the robosherlock package (e.g. the demo.xml) to *<package_name>/descriptors/analysis_engines*. After compilations notice how the paths of the components have changed.
