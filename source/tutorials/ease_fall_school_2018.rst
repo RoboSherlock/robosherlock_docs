@@ -61,5 +61,21 @@ Knowledge integration and query answering
 
  * The task of RoboSherlock is to complete the objects designators sent by the high-level executive; 
 
+Start by launching knowrob and the web server::
+
+    roslaunch rs_run_configs json_prolog_and_rosbridge.launch 
+    
+This launches the json prolog interface to knowrob and all web frontend for interacting with RoboSherlock; The web frontend is accessible on port 5555::
+
+    localhost:5555
+
+Use the predifined queries to see what is stored in the knowledge base;
+
+Extend the query answering capabilities with new annotators. The annotators have the following pre- and postconditions:
+
+.. note:: Define a set of new annotators such the following conditions are met;
+   AnnotatorA takes as input an annotation of type rs.classification.Annotation; 
+
+
 
     
