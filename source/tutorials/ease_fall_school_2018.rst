@@ -6,6 +6,7 @@ RoboSherlock Tutorial: EASE Fall School 2018
 
 This tutorial assumes some basic understanding of what ROS is and how to use its tools. The instructions here have been tested under Ubuntu 16.04, though since we are using docke it should work on any OS.
 
+-------------
 Prerequisites
 -------------
 
@@ -25,7 +26,7 @@ To start the a container you will need to execute docker run with a couple of pa
     
 The ``-d`` option tells docker torun the container as a daemon, you will have to wait for a few seconds untill everything launches. To check that runnning the container was successfull open a browser (Firefox was tested to work, other browsers might have issues), and go to::
 
-    localhost:3333
+    localhost:3000
 
 An xterm should open asking for a username and a password; 
 
@@ -34,10 +35,36 @@ An xterm should open asking for a username and a password;
 The docker container contains a full installation of RoboShelrock, with all the dependencies and all of its current capabilities. To ease the use of the xterm in the browser we have installed byobu (a screen variant) that allows openning multiple termina; windows, verticaland horizontal splitting etc. (Check the `cheat sheets <https://www.iconspng.com/images/byobu-cheat-sheet/byobu-cheat-sheet.jpg>`_ for more detail.
 
 
+----------------------------
 Introduction to RoboSherlock
 ----------------------------
 
-RoboSherlock is a ROS package, and uses ROS to interface with other components of a robotic system.
+RoboSherlock is a ROS package, and uses ROS to interface with other components of a robotic system. Before you begin let's set up a new ROS workspace. 
+
+
+Short ROS primer
+----------------
+
+
+In your user home create a folder for the new workspace and initialize it as a catkin worksapce::
+    
+    mkdir -p sandbox_ws/src
+    cd sandbox_ws
+    catkin init 
+   
+Build the empty workspace::
+    
+    catkin build
+
+and source it::
+
+   source /home/rs/sandbox_ws/devel/setup.bash
+
+If you now execute ``roscd`` you should end up in ``/home/rs/sandbox_ws/devel/setup.bash``
+
+
+The basics of RoboSherlock
+--------------------------
 
  * Task 1: create a ros package of your own (follow the tutorial from :ref:`create_your_rs_catkin_pkg`.
 
@@ -47,15 +74,17 @@ RoboSherlock is a ROS package, and uses ROS to interface with other components o
  
  * Task 4: log an execution
   
-
-Inspecting results
-------------------
+-------------------------------
+Adapting capabilities to a task
+-------------------------------
 
  * Let's look at the results from the previous execution;
  * Let's look at an experiment that we ran on the robot
  * export some images
  * train your own classifier and execute
 
+
+ 
 Knowledge integration and query answering
 -----------------------------------------
 
