@@ -20,15 +20,23 @@ Once docker is installed you can got the Robosherlock image by opening a termina
 
     docker pull robosherlock/rs_interactive
     
-To start the a container you will need to execute docker run with a couple of parameters (mainly for port forwarding so the ineractive web interface can work). Alternatively you can simply forward all ports ::
+On the host machine create a folder that will be shared with the docker container::
 
-    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 --name rs_demo robosherlock/rs_interactive
+    mkdir sandbox
     
-The ``-d`` option tells docker torun the container as a daemon, you will have to wait for a few seconds untill everything launches. To check that runnning the container was successfull open a browser (Firefox was tested to work, other browsers might have issues), and go to::
+To start the a container you will need to execute docker run with a couple of parameters (mainly for port forwarding so the ineractive web interface can work). Alternatively you can simply forward all ports (might conflict with existin mongodb though)::
+
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -v ./sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
+    
+The ``-d`` option tells docker torun the container as a daemon, you will have to wait for a few seconds untill everything launches. Make sure to give the correct path to the ``sandbox`` folder on the host pc. To check that runnning the container was successfull open a browser (Firefox was tested to work, other browsers might have issues), and go to::
 
     localhost:3000
 
-An xterm should open asking for a username and a password; 
+An xterm should open asking for a username and a password; Create a new file in the sandbox folder and create a file there::
+    
+    cd ~/sandbox && touch test_file
+
+You should see the file appearing in the sandbox folder of the host machine. 
 
 .. warning:: Changes made to a docker container persist only until the container exists; If you stop and remove the container changes you have made to it will be lost; To make changes permanent you need to commit them to the image; If you stop the container you can restart it using ``docker start rs_demo``. It is recommended to also use the ``-v path_to_host_folder:path_to_docker_folder`` option to share some of the output files of RoboSherlock with the host (e.g. images) for easier visualization.
 
@@ -48,9 +56,10 @@ Short ROS primer
 
 In your user home create a folder for the new workspace and initialize it as a catkin worksapce::
     
-    mkdir -p sandbox_ws/src
-    cd sandbox_ws
+    mkdir -p demo_ws/src
+    cd demo_ws
     catkin init 
+    catkin config --extend /homer/rs/rs_ws/devel
    
 Build the empty workspace::
     
@@ -58,9 +67,11 @@ Build the empty workspace::
 
 and source it::
 
-   source /home/rs/sandbox_ws/devel/setup.bash
+   source /home/rs/demo_ws/devel/setup.bash
 
-If you now execute ``roscd`` you should end up in ``/home/rs/sandbox_ws/devel/setup.bash``
+Make sure to add it to your ``bashrc`` so that terminals that you open in the future will know about it::
+
+    echo 'source /home/rs/demo_ws/devel/setup.bash' >> ~/.bashrc
 
 
 The basics of RoboSherlock

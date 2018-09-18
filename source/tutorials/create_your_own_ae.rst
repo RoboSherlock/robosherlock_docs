@@ -15,16 +15,16 @@ Create your annotator
 
 Besides the implementation, it is mandatory in the UIM framework to have meta definitions of every component. A small script is available that makes creating new components a bit faster. Execute::
   
-  rosrun robosherlock rs_new_annotator rs_test MyFirstAnnotator
+  rosrun robosherlock rs_new_annotator rs_tutorial MyFirstAnnotator
 
-which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_test*. It creates an xml meta file in *descriptors/annotators* and a source file in *./src*. In order to compile it you need to add the following two lines in the CMakeLists.txt::
+which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_tutorial*. It creates an yaml meta file in *descriptors/annotators* and a source file in *./src*. It also adds the necessary lines to your CMakeLists.txt::
 
   rs_add_library(rs_myFirstAnnotator src/MyFirstAnnotator.cpp)
   target_link_libraries(rs_myFirstAnnotator ${CATKIN_LIBRARIES})
 
-Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and an xml descriptor.
+Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and a yaml descriptor.
 
-The xml descriptor
+The yaml descriptor
 ------------------
 
 The first important part in the descriptor is the tag that tells the system where the annotator is implemented:: 

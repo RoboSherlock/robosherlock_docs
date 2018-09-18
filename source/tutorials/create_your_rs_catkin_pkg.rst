@@ -4,22 +4,22 @@
 Create your own catkin-robosherlock package
 ===========================================
 
-Make sure you are in the source folder of a catkin workspace and run::
+Let's create a new package called ``rs_tutorial``. Make sure you are in the source folder of a catkin workspace and run::
 
-    rosrun robosherlock rs_create_package <package_name>
+    rosrun robosherlock rs_create_package rs_tutorial
 
 
 or if you've added the ``scripts`` folder to your PATH simply run::
     
-    rs_create_package <package_name>
+    rs_create_package rs_tutorial
 
 The script will create a new catkin package that has the structure needed for Robosherlock.::
 
    'package_name'
     |-descriptors         
-       |-analysis_engines -> xml definitions of aggregate AEs
-       |-annotators       -> xml definitions of primitive AEs
-       |-typesystem       -> xml deginitions of the typesystem
+       |-analysis_engines -> yaml definitions of aggregate AEs
+       |-annotators       -> yaml definitions of primitive AEs
+       |-typesystem       -> yaml deginitions of the typesystem
           |-all_types.xml -> typesystem definition
     |-include
        |-package_name     -> include folder
@@ -54,4 +54,4 @@ The first part sets the five CMake variables that are in turned used by the scri
 	
 	* generate_type_system: checks if we have newly defined types in the xml descriptions and generates the C++ container classes for them
 	
-You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. To see the effect of the scripts, try copying over an analysis engine from the robosherlock package (e.g. the demo.xml) to *<package_name>/descriptors/analysis_engines*. After compilations notice how the paths of the components have changed.
+You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. If you want ``rs_tutorial`` to depend on other robosherlock packages add them to the ``package.xml`` and ``CmakeLists.txt``.
