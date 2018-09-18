@@ -27,54 +27,22 @@ Every component in RoboSherlock is a  C++ library, that gets loaded during runti
 The yaml descriptor
 ------------------
 
-The first important part in the descriptor is the tag that tells the system where the annotator is implemented:: 
+Confgiruations (meta definitions) of annotators are defined for every annotator in ``yaml`` files located in the ``<package_name>/descriptors/annotators`` folder. The annotator thatwe just created has the following configuration file:
 
-	  <primitive>true</primitive>
-	  <annotatorImplementationName>rs_myFirstAnnotator</annotatorImplementationName>
+.. code-block:: yaml
+    annotator:
+        name: MyFirstAnnotator
+        implementation: rs_myFirstAnnotator
+    parameters:
+        test_param: 0.01
+    capabilities:
+        inputs: {}
+        outputs: {}
+
+The most important part of this configuration file is the implementation name. This is the name of a dynamic library that is the implementation of the annotator. All other parts of the configuration are optional, but this one is mandatory. 
+
+Tha param section defines configuration parameters that the annotator has. These can be of type ``string, float, int, boolean`` or arrays of. The last part can help define capabilities. This part is useful if we are using the pipeline planning and knowledge integration of the system, allowing users to set i/o constraints for annotators.
 	  
-The value here is the exact name of the library file that is being generated during compilation. Setting the primitive tag to true signals the system that the descriptor is for single module (setting this to false would make it an aggregate analysis engine, one that we use for defining pipelines).
-
-This is followed by meta data of the annotator (name, version a description etc)
-
-  - name of the annotator, that is used to reference it from a pipeline::
-	
-		<name>MyFirstAnnotator</name>
-  
-  - configuration parameters (declaration is separate from parameter settings, since it is not mandatory to define values here. They can be set to optional and defined in the analysis engines)::
-  
-	    <configurationParameters>
-	      <configurationParameter>
-	        <name>test_param</name>
-	        <type>Float</type>
-	        <multiValued>false</multiValued>
-	        <mandatory>false</mandatory>
-	      </configurationParameter>
-	    </configurationParameters>
-	    <configurationParameterSettings>
-	      <nameValuePair>
-	        <name>test_param</name>
-	        <value>
-	          <float>0.01</float>
-	        </value>
-	      </nameValuePair>
-	    </configurationParameterSettings>
-	    
-  - path to the type-system(make sure the file actually exists)::
-	    
-	    <typeSystemDescription>
-	      <imports>
-	        <import location="../typesystem/all_types.xml"/>
-	      </imports>
-	    </typeSystemDescription>
-  
-  - capabilities of the annotator in terms of I/O as defined in the type-system::
-	    
-		<capabilities>
-		  <capability>
-		    <inputs/>
-		    <outputs/>
-		  </capability>
-		</capabilities>
    
 The cpp implementation
 ----------------------
@@ -140,37 +108,17 @@ The three methods that we overwrite implement the functionalities of the annotat
 .. note:: ``SceneCas`` is a wrapper for the uima::CAS class from uimacpp for conveniently setting and getting data. 
 
 
-You can now compile it with catkin_make.
+You can now compile it with catkin_make or catkin build (we recommend using ``catkin-tools``.
+
 
 Add it to an AE and run
 -----------------------
 
-In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.xml to our poroject. Start by renaming it to something like *my_demo.xml* so the naming does not collide with the one in the robosherlock package. Open my_demo.xml and add your new annotator to the pipeline by adding a new *<node>* tag in the fixed flow:
-
-.. note:: Notice that during compilation MyFirstAnnotator was added to the  *delegateAnalysisEngineSpecifiers*
-
-Your fixed flow should look something like this now: 
-
-.. code-block:: xml
-   :lineno-start: 133 
-   :emphasize-lines: 4
-   
-   <fixedFlow>
-   <node>CollectionReader</node>
-   <node>ImagePreprocessor</node>
-   <node>MyFirstAnnotator</node>
-   <node>PointCloudFilter</node>
-   <node>NormalEstimator</node>
-   <node>PlaneAnnotator</node>
-   <node>ImageSegmentationAnnotator</node>
-   <node>PointCloudClusterExtractor</node>
-   <node>ClusterMerger</node>
-   <node>ResultAdvertiser</node>
-   </fixedFlow>
+In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.yaml to our poroject and renamed it to ``my_demo.yaml``. Open it and add your new annotator to the pipeline by adding it to the fixed flow:
    
 Run the pipeline as described in :doc:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
 
-.. note:: It is recommended to  create you own launch file in the current package. Notice that you have to change the arguments of the ros node in the launch file in order to execute your new pipeline( from demo to my_demo)
+.. note:: It is recommended to create you own launch file in the current package. Notice that you have to change the arguments of the ros node in the launch file in order to execute your new pipeline( from demo to my_demo)
 
 .. warning:: The annotators execute in the order they are defined in the fixed flow. Since the demo annotator accesses point clouds it needs to be put after the ImagePreprocessor component, since this is the module that creates the point cloud from the depth and rgb images. 
 
