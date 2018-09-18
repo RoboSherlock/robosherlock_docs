@@ -22,7 +22,7 @@ Once docker is installed you can got the Robosherlock image by opening a termina
     
 To start the a container you will need to execute docker run with a couple of parameters (mainly for port forwarding so the ineractive web interface can work). Alternatively you can simply forward all ports ::
 
-    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 --name rs_demo robosherlock/rs_interactive
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 --name rs_demo robosherlock/rs_interactive
     
 The ``-d`` option tells docker torun the container as a daemon, you will have to wait for a few seconds untill everything launches. To check that runnning the container was successfull open a browser (Firefox was tested to work, other browsers might have issues), and go to::
 
@@ -32,7 +32,7 @@ An xterm should open asking for a username and a password;
 
 .. warning:: Changes made to a docker container persist only until the container exists; If you stop and remove the container changes you have made to it will be lost; To make changes permanent you need to commit them to the image; If you stop the container you can restart it using ``docker start rs_demo``. It is recommended to also use the ``-v path_to_host_folder:path_to_docker_folder`` option to share some of the output files of RoboSherlock with the host (e.g. images) for easier visualization.
 
-The docker container contains a full installation of RoboShelrock, with all the dependencies and all of its current capabilities. To ease the use of the xterm in the browser we have installed byobu (a screen variant) that allows openning multiple termina; windows, verticaland horizontal splitting etc. (Check the `cheat sheets <https://www.iconspng.com/images/byobu-cheat-sheet/byobu-cheat-sheet.jpg>`_ for more detail.
+The docker container contains a full installation of RoboShelrock, with all the dependencies and all of its current capabilities. To ease the use of the xterm in the browser we have installed byobu (a screen variant) that allows openning multiple terminal windows, verticaland horizontal splitting etc. (Check the `cheat sheets <https://www.iconspng.com/images/byobu-cheat-sheet/byobu-cheat-sheet.jpg>`_ for more detail). The instructions that follow are all meant to be executed in the terminal window in a browser. When prompted for a new terminal window, open a new tab in byobu or split the existing one.
 
 
 ----------------------------
