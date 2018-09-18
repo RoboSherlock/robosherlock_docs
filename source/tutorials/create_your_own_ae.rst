@@ -1,8 +1,8 @@
 .. _create_your_own_ae:
 
-==============================
-Write your own Analysis Engine
-==============================
+========================
+Write your own Annotator
+========================
 
 This tutorial assumes that the reader has created a robosherlock package, and already run the pipeline described in the :ref:`first tutorial<pipeline>`.
 
