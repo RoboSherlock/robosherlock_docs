@@ -157,26 +157,45 @@ Now run ``my_demo`` again and inspect the restuls in the db using the web interf
 Knowledge integration and query answering
 -----------------------------------------
 
- * The task of RoboSherlock is to complete the objects designators sent by the high-level executive; 
+The task of RoboSherlock is to complete the objects designators sent by the high-level executive; For this it offers a query interface. Queries get interpreted, a pipline is planned and executed.
 
-Start by launching knowrob and the web server::
+If the web app from the preovious section is still running stop it. Launch knowrob and the web server together::
 
     roslaunch rs_run_configs json_prolog_and_rosbridge.launch 
     
-This launches the json prolog interface to knowrob and all web frontend for interacting with RoboSherlock; The web frontend is accessible on port 5555::
+This launches the json prolog interface to knowrob and all web frontend for interacting with RoboSherlock; You are going to be using the RS live tab of the web interface for this part of the tutorial. Fir the interactive visualization and query interface to work we need to start RoboSherlock using roslaunch. Copy one over from ``rs_run_configs`` and edit it so it launches ``my_demo.yaml``::
 
-    localhost:5555
+    roscd rs_tutorial
+    mkdir launch
+    cp $(rospack find rs_run_configs)/launch/wed_demo.launch./launch
 
 
+Before launching robosherlock go to the ``Live query`` tab of the web frontend and start executing the predefined queries, up until the detection queries section.  
 
-Query answering and knowledge integration
------------------------------------------
-    
+.. image:: ../imgs/tutorials/rs_live.png
+   :align: center
+   :height: 100pc
+   :width: 100pc
 
-Extend the query answering capabilities with new annotators. The annotators have the following pre- and postconditions:
 
-.. note:: Define a set of new annotators such the following conditions are met;
-   AnnotatorA takes as input an annotation of type rs.classification.Annotation; 
+Once you retracted all assertions you can now launch robosherlock by running::
+
+    roslaunch rs_tutorial web_demo.launch
+
+Notice how on the last lines of RoboSherlocks outputs it is going to complain about MyFirstAnnotator not existing in the knowledge base. Don't worry about this for now. We wil fix it later on. 
+
+Got to the web frontend and execute the detetion queries. In the middle bottom pane you can view the partial results of the annotators. Try combining the detection queries, change values etc.  
+
+.. image:: ../imgs/tutorials/rs_live_annotator_results.png
+   :align: center
+   :height: 100pc
+   :width: 100pc
+
+
+Let's extend the querying capabilities and add your packages annotations to the tool-chain. Create a second annotator called ``MySecondAnnotator``. Let's edit both of our annotators input and output requirements. 
+
+
+..TBC
 
 You're done!
 
