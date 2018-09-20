@@ -197,6 +197,4 @@ Let's extend the querying capabilities and add your packages annotations to the 
 
 ..TBC
 
-You're done!
-
     
