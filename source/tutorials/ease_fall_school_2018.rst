@@ -226,6 +226,4 @@ For ``MySecondAnnotator`` let's consider an algorithm that finds handles on cups
 Restart json_prolog and RoboSherlock (in this order). Plan a pipeline for detection Cups. Now plan one for detecting Hanldes.
 ..TBC
 
-You're done!
-
     
