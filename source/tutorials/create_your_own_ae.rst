@@ -25,11 +25,12 @@ which will create a new annotator called *MyFirstAnnotator* in the previously cr
 Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and a yaml descriptor.
 
 The yaml descriptor
-------------------
+-------------------
 
 Confgiruations (meta definitions) of annotators are defined for every annotator in ``yaml`` files located in the ``<package_name>/descriptors/annotators`` folder. The annotator thatwe just created has the following configuration file:
 
 .. code-block:: yaml
+    
     annotator:
         name: MyFirstAnnotator
         implementation: rs_myFirstAnnotator
