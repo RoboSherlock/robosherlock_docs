@@ -1,6 +1,6 @@
 .. colorbox:: 2016.01.17 RoboSherlock at ERF2016
 	
-	.. image:: imgs/erf2016_logo.png
+        .. image:: imgs/erf2016_logo.png
 		:align: center
 
 	We are happy to announce that the latest advances of RoboSherlock will be persented at the European Robotics Forum 2016 in Ljubljana, Slovenia, as part of the 'Believing in Robot's Eyes - Robust Observation of Task Relevant Cues' Workshop.

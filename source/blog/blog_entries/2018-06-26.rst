@@ -32,7 +32,7 @@
     I implemented Faster-RCNN object detection annotator.
     The result is shown as below.
     
-    .. image:: ../imgs/faster_rcnn_robosherlock.png
+    .. image:: ../../imgs/faster_rcnn_robosherlock.png
  	:align: center
         :height: 100pc
         :width: 100pc

@@ -192,9 +192,38 @@ Got to the web frontend and execute the detetion queries. In the middle bottom p
    :width: 100pc
 
 
-Let's extend the querying capabilities and add your packages annotations to the tool-chain. Create a second annotator called ``MySecondAnnotator``. Let's edit both of our annotators input and output requirements. 
+Let's first fix the annotator feature extraction. Add an input value constraint to ``KnnAnnotator``:
 
+.. note:: In the current implementation input restrictions and output domains need to be set in the individual yamls of annotators. An extension is already on its way for allowing for this from the AAE yamls. 
 
+.. code-block:: yaml
+  
+  capabilities:
+    inputs: 
+        - rs.scene.MergedCluster
+        - rs.annotation.Features: ['BVLC_REF']
+
+For KnnAnnotator to be included in the pipeline planning process we now need a component that produces an annotation of type ``rs.annotation.Features`` of type ``BVLC_REF``. Modify ``CaffeAnnotator.yaml`` to output rs.annotation.Features of type BVLC_REF. 
+
+.. code-block:: yaml
+
+    capabilties:
+        outputs:
+         - rs.annotation.Fetures: ['BVLC_REF']
+         
+Restart RoboSherlock and execute a new detection query. Notice that ``PCLDescriptorExtractor`` is no longer part of the planned pipeline.
+
+ 
+Let's extend the tool-chain and add your package's annotations to the tool-chain. Create a second annotator called ``MySecondAnnotator``. Let's edit both of our annotators input and output requirements. 
+
+As input requirements of ``MyFirstAnnotator`` let's add a shape annotation (``rs.annotation.Shape``) as cylinders, and as output a detection result (``rs.annotation.Detection``) with output domain Cups.
+
+For ``MySecondAnnotator`` let's consider an algorithm that finds handles on cups. As input it will take classification annotations ``rs.annotation.Classification`` with input value constraint set to ``Cups`` and produces a detection of type Handle. Once modeled we need to update the ontoloy::
+
+    roscd robosherlock_knowrob/owl
+    rosrun robosherlock_knowrob generateOwlFromXMl.py
+
+Restart json_prolog and RoboSherlock (in this order). Plan a pipeline for detection Cups. Now plan one for detecting Hanldes.
 ..TBC
 
 You're done!
