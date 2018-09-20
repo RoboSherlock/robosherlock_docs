@@ -218,7 +218,7 @@ Let's extend the tool-chain and add your package's annotations to the tool-chain
 
 As input requirements of ``MyFirstAnnotator`` let's add a shape annotation (``rs.annotation.Shape``) as cylinders, and as output a detection result (``rs.annotation.Detection``) with output domain Cups.
 
-For ``MySecondAnnotator`` let's consider an algorithm that finds handles on cups. As input it will take classification annotations ``rs.annotation.Classification`` with input value constraint set to ``Cups`` and produces a detection of type Handle. Once modeled we need to update the ontoloy::
+For ``MySecondAnnotator`` let's consider an algorithm that finds handles on cups. As input it will take classification annotations ``rs.annotation.Classification`` with input value constraint set to a specific cup (``CupEcoOrange``) and produces a detection of type Handle. Once modeled we need to update the ontoloy::
 
     roscd robosherlock_knowrob/owl
     rosrun robosherlock_knowrob generateOwlFromXMl.py
