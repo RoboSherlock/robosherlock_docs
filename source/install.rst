@@ -1,8 +1,8 @@
 .. _install_rs:
 
-=================
-Install and Setup
-=================
+=================================
+Install and Setup (master branch)
+=================================
 
 The recommended operating system is Ubuntu 16.04 LTS. *RoboSherlock* comes as a ROS package, so you will need to install **ROS Kinetic** (desktop full). Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_. Ubuntu 14.04 will still work, but as of now it is considered to be deprecated and support will stop soon. 
 

@@ -29,15 +29,15 @@ Pressing left or right in the point cloud viewer (n or p in the image viewer) wi
 
 .. image:: ../imgs/demoResults.png
    :align: center
-   :height: 100pc
-   :width: 100pc
+   :height: 20pc
+..    :width: 100pc
 
 The demo is a very simple example of how perception pipelines are defined and run in RoboSherlock. The definition of the pipeline is located in 
 *./descriptors/analysis_engines/demo.yaml*. Contents of it are the following
 
 .. code-block:: yaml
    
-    ae: # -> various meta data
+    ae: # -> various meta data	
         name: demo
     fixedflow: # -> the fixedflow a.k.a the perception algorithms, i/o components etc.
         - CollectionReader

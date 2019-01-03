@@ -2,5 +2,5 @@
    
    Our paper :cite:`balint18iros` on learning to recognize new objects through generating variations of scenes using the integration between the Unreal Engione and RoboSherlock has been accepted at this years IROS. We are exited to present our work at this venue, and share our insights on trainign perception algorithms for robtic applications through the use of syntetic data generated from virtual reality.  
    
-   .. youtube:: Br3B7vCUnnE
-	  :height: 300px
+..   .. youtube:: Br3B7vCUnnE
+..	  :height: 300px

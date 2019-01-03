@@ -104,8 +104,8 @@ In a browser navigate to ``localhost:5555``. Choose Objects Store tab and in the
 
 .. image:: ../imgs/rs_web_selecting_database.png
    :align: center
-   :height: 100pc
-   :width: 100pc
+   :width: 30pc
+..  :height: 30pc
 
 Try chaning some of the filters for querying, and export the data. Notice that each object has very few annotations (size, pose, and geometry). Change the database to PnP15IvhSymbolicGTFixed. Start querying the database; Notice how this one has much much more information and even the objects tab returns results. Let's make our ``my_demo.yaml`` generate similar values. For this you should add a couple of extra annotators before the storage writer to the fixed flow, namely:
 
@@ -174,8 +174,9 @@ Before launching robosherlock go to the ``Live query`` tab of the web frontend a
 
 .. image:: ../imgs/tutorials/rs_live.png
    :align: center
-   :height: 100pc
-   :width: 100pc
+   :width: 30pc
+..    :height: 30pc
+..    :width: 30pc
 
 
 Once you retracted all assertions you can now launch robosherlock by running::
@@ -188,8 +189,8 @@ Got to the web frontend and execute the detetion queries. In the middle bottom p
 
 .. image:: ../imgs/tutorials/rs_live_annotator_results.png
    :align: center
-   :height: 100pc
-   :width: 100pc
+   :width: 30pc
+..    :height: 30pc
 
 
 Let's first fix the annotator feature extraction. Add an input value constraint to ``KnnAnnotator``:

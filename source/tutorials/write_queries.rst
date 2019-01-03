@@ -8,14 +8,14 @@ This tutorial assumes that the reader has followed the installation guide, which
 
 Before using queries in robosherlock, json_prolog needs to be started as follows.::
 
-	roslaunch json_prolog json_prolog.launch _initial_package:=robosherlock_knowrob
+	roslaunch json_prolog json_prolog.launch initial_package:=robosherlock_knowrob
 
 RoboSherlock supports querying for certain characteristics, which it will try to perceive in the scene.
 As an example, the user may want to know, whether there are any blue objects in the scene.
 
 Querying can be done using the ROS-Service Interface. The query itself is a json string. Execute the following query, which corresponds to the example above. ::
 
-	rosservice call /query_json "query: '{\"detect\":{\"color\":\"blue\"}}'" 
+	rosservice call /RoboSherlock/query "query: '{\"detect\":{\"color\":\"blue\"}}'" 
 
 .. note:: The quotation marks in the json string need to be escaped when using rosservice from the command line.
 
