@@ -13,10 +13,8 @@ Tutorials
     tutorials/pipeline
     tutorials/create_your_own_ae
     tutorials/mongodb
-    
-..     tutorials/new_type
-    
-..     tutorials/write_queries
-..     tutorials/query_interface
+    tutorials/new_type
+    tutorials/write_queries
+    tutorials/query_interface
     
 ..    tutorials/python_annotator    
