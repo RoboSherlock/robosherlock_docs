@@ -1,19 +1,19 @@
 .. _ease_fall_school_assignements:
 
-============================================
+#######################################
 RoboSherlock Tutorial: EASE Fall School
-============================================
+#######################################
 
-----------------------------
+
+****************************
 Introduction to RoboSherlock
-----------------------------
+****************************
 
 RoboSherlock is a ROS package, and uses ROS to interface with other components of a robotic system. Before you begin let's set up a new ROS workspace. 
 
 
-ROS workspace setup
--------------------
-
+1. ROS workspace setup
+======================
 
 In your users home create a folder for the new workspace and initialize it as a catkin worksapce::
     
@@ -35,21 +35,375 @@ Make sure to add it to your ``bashrc`` so that terminals that you open in the fu
     echo 'source /home/rs/demo_ws/devel/setup.bash' >> ~/.bashrc
 
 
-The basics of RoboSherlock
---------------------------
 
- * Task 1: create a ros package of your own (follow the tutorial from :ref:`create_your_rs_catkin_pkg`.
+2. Create your own catkin-robosherlock package
+==============================================
 
- * Task 2: run a simple pipeline: follow the tutorial: :ref:`pipeline`.
- 
- * Task 3: how to write your own annotator: :ref:`create_your_own_ae`.
- 
- * Task 4: log an execution: :ref:`mongodb`.
+Let's create a new package called ``rs_tutorial``. Make sure you are in the source folder of a catkin workspace and run::
 
- 
--------------------------------
+    rosrun robosherlock rs_create_package rs_tutorial
+
+
+or if you've added the ``scripts`` folder to your PATH simply run::
+    
+    rs_create_package rs_tutorial
+
+The script will create a new catkin package that has the structure needed for Robosherlock.::
+
+   'package_name'
+    |-descriptors         
+       |-analysis_engines -> yaml definitions of aggregate AEs
+       |-annotators       -> yaml definitions of primitive AEs
+       |-typesystem       -> yaml deginitions of the typesystem
+          |-all_types.xml -> typesystem definition
+    |-include
+       |-package_name     -> include folder
+          |-types         -> folder for the auto-generated type implementations
+    |-src                 -> code base
+    |-package.xml         -> catkin package xml   
+    |-CMakeLists.txt      -> CMake file
+
+
+It edits the *CMakeLists.txt*, sets the CMake variables needed for code generation. finding annotations automatically::
+
+  ################################################################################
+  ## Constants for project                                                      ##
+  ################################################################################
+  set(NAMESPACE package_name)
+  set(TYPESYSTEM_CPP_PATH ${PROJECT_SOURCE_DIR}/include/package_name/types)
+  set(TYPESYSTEM_XML_PATH ${PROJECT_SOURCE_DIR}/descriptors/typesystem)
+  set(ANNOTATOR_PATH      ${PROJECT_SOURCE_DIR}/descriptors/annotators)
+  set(ENGINE_PATH         ${PROJECT_SOURCE_DIR}/descriptors/analysis_engines)
+
+
+  ################################################################################
+  ## Update analysis engines, typesystem and include all relevant files         ##
+  ################################################################################
+  
+  ## generate classes from the typesystem xml files
+  generate_type_system(robosherlock)
+  #find all relevant files
+  find_additional_files()
+
+The first part sets the five CMake variables that are in turned used by the scripts that are called in the second part. 
+	
+	* generate_type_system: checks if we have newly defined types in the xml descriptions and generates the C++ container classes for them
+	
+You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. If you want ``rs_tutorial`` to depend on other robosherlock packages add them to the ``package.xml`` and ``CMakeLists.txt``.
+
+
+3. Running a pipeline in RoboSherlock
+=====================================
+
+
+This tutoial assumes that you have followed the tutorial on :ref:`creating a new robosherlock package <create_your_rs_catkin_pkg>`.
+It introduces users to the components of the framework, and how to use them. Download the provided :download:`sample bag file <../_static/test.bag>`. If you are following the docker tutorial you will find the bagfile in ``~/data/`` folder.  The bagfile was recorded using a PR2 robot and contains a short stream of kinect data, namely the topics (check with ``rosbag info``): ::
+  
+    /kinect_head/rgb/image_color/compressed
+    /kinect_head/depth_registered/comressedDepth
+    /kinect_head/rgb/camera_info
+    /tf
+
+Tf is needed to get the transformation between camera frame and map or robot base. This feature can be turned off in the camera configuration files.
+
+Perception pipelines in RoboSherlock are defined as analysis_engines in the ``descriptor/analysis_engines`` folder of any robosherlock package. The core robosherlock package offers an executable called ``run`` that we can use to run any of these pipelines. To see how this work try and run the ``demo`` pipeline from robosherlock::
+    
+    rosrun robosherlock run _ae:=demo
+    
+This will initialize active components of RoboSherlock and will wait for data to be published on the camera topics. The executable takes several rosparams as input, one of them being the name of the analysis engine we want to execute. To see more options run with ``--help`` option. For now just use the default parameters.  To actually process some images we will need some data. Start the bagfile: ::    
+    
+    rosbag play test.bag --loop
+   
+You should see the results of the individual annotators in the visualizer windows (one for the colored image and one for the generated point clouds). If you don't see a visualizer window try turning visualization on by stopping the node and restarting it with the ``_vis:=true`` option (depending on how you started the docker container this might not work, but don't worry, we have other ways of seeing the results).
+
+Pressing left or right in the point cloud viewer (n or p in the image viewer) will change the view and show results of individual annotators. You should see an output similar to the one below:
+
+.. image:: ../imgs/demoResults.png
+   :align: center
+   :height: 20pc
+..    :width: 100pc
+
+The demo is a very simple example of how perception pipelines are defined and run in RoboSherlock. The definition of the pipeline is located in 
+*./descriptors/analysis_engines/demo.yaml*. Contents of it are the following
+
+.. code-block:: yaml
+   
+    ae: # -> various meta data	
+        name: demo
+    fixedflow: # -> the fixedflow a.k.a the perception algorithms, i/o components etc.
+        - CollectionReader
+        - ImagePreprocessor
+        - PointCloudFilter
+        - NormalEstimator
+        - PlaneAnnotator
+        - ImageSegmentationAnnotator
+        - PointCloudClusterExtractor
+        - ClusterMerger
+    CollectionReader: # parameter overrides for annotators
+        camera_config_files: ['config_kinect_robot.ini']
+
+.. A detailed presentation of each component can be found on the :ref:`annotation descriptions <annotators>`
+.. 
+Let's modify this pipeline. For this let's make a copy of it in ``rs_tutorial/descriptors/analysis_engines/``, and call it ``my_demo.yaml``.
+
+If run without pipeline planning, the order in the fixed flow is extremely important. Try to add *Cluster3DGeometryAnnotator* before *PlaneAnnotator* and run the pipeline. Now add it after the *ClusterMerger* and relaunch RoboSherlock (no compilation required).
+You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the output in the terminal for the results).
+.. 
+If you are running in docker and you don't have a visualization add *DrawResultImage* to the end of your pipeline, and restart RoboShelrock. It will save images to the workdir for each processed scene.
+
+
+4. Write your own Annotator
+===========================
+
+This tutorial assumes that the reader has created a robosherlock package, and already run the pipeline described in the :ref:`first tutorial<pipeline>`.
+
+As described in the :ref:`overview<overview_rs>`, analysis engines can be either primitive or aggregate. A primitive analysis engine is called an annotator. In the following the creation of a new primitive analysis engine will be described, followed by creating an aggregate AE that uses is.
+
+.. note:: it is not required that all primitive analysis engines annotate a scene, but for simplicity we call individual experts annotators. E.g. primitive AEs can generate object hypotheses, or have I/O tasks
+
+Create your annotator
+---------------------
+
+Besides the implementation, it is mandatory in the UIM framework to have meta definitions of every component. A small script is available that makes creating new components a bit faster. Execute::
+  
+  rosrun robosherlock rs_new_annotator rs_tutorial MyFirstAnnotator
+
+which will create a new annotator called *MyFirstAnnotator* in the previously created ROS-package *rs_tutorial*. It creates an yaml meta file in *descriptors/annotators* and a source file in *./src*. It also adds the necessary lines to your CMakeLists.txt::
+
+  rs_add_library(rs_myFirstAnnotator src/MyFirstAnnotator.cpp)
+  target_link_libraries(rs_myFirstAnnotator ${CATKIN_LIBRARIES})
+
+Every component in RoboSherlock is a  C++ library, that gets loaded during runtime. The implementation consists of a cpp file and a yaml descriptor.
+
+The yaml descriptor
+-------------------
+
+Confgiruations (meta definitions) of annotators are defined for every annotator in ``yaml`` files located in the ``<package_name>/descriptors/annotators`` folder. The annotator thatwe just created has the following configuration file:
+
+.. code-block:: yaml
+    
+    annotator:
+        name: MyFirstAnnotator
+        implementation: rs_myFirstAnnotator
+    parameters:
+        test_param: 0.01
+    capabilities:
+        inputs: {}
+        outputs: {}
+
+The most important part of this configuration file is the implementation name. This is the name of a dynamic library that is the implementation of the annotator. All other parts of the configuration are optional, but this one is mandatory. 
+
+Tha param section defines configuration parameters that the annotator has. These can be of type ``string, float, int, boolean`` or arrays of. The last part can help define capabilities. This part is useful if we are using the pipeline planning and knowledge integration of the system, allowing users to set i/o constraints for annotators.
+	  
+   
+The cpp implementation
+----------------------
+
+`MyFirstAnnotator.cpp` was generated in the ``src`` folder::
+    
+	#include <uima/api.hpp>
+
+	#include <pcl/point_types.h>
+	//RS
+	#include <rs/types/all_types.h>
+	#include <rs/scene_cas.h>
+	#include <rs/utils/time.h>
+
+	using namespace uima;
+
+	class MyFirstAnnotator : public Annotator
+	{
+	private:
+	  float test_param;
+
+	public:
+
+	  TyErrorId initialize(AnnotatorContext &ctx)
+	  {
+	    outInfo("initialize");
+	    ctx.extractValue("test_param", test_param);
+	    return UIMA_ERR_NONE;
+	  }
+	
+	  TyErrorId destroy()
+	  {
+	    outInfo("destroy");
+	    return UIMA_ERR_NONE;
+	  }
+	
+	  TyErrorId process(CAS &tcas, ResultSpecification const &res_spec)
+	  {
+	    outInfo("process start");
+	    rs::StopWatch clock;
+	    rs::SceneCas cas(tcas);
+	    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_ptr(new pcl::PointCloud<pcl::PointXYZRGBA>);
+	    outInfo("Test param =  " << test_param);
+	    cas.get(VIEW_CLOUD,*cloud_ptr);
+	
+	    outInfo("Cloud size: " << cloud_ptr->points.size());
+	    outInfo("took: " << clock.getTime() << " ms.");
+	    return UIMA_ERR_NONE;
+	  }
+	};
+	
+	// This macro exports an entry point that is used to create the annotator.
+	MAKE_AE(MyFirstAnnotator)
+
+Implementation of an annotator extends the ``Annotator`` class of the uimacpp library. ``Annotator`` has several virtual methods defined out of which we are overriding the ``initialize``, ``destroy`` and ``process`` functions. Since annotators get compiled into runtime libraries they must end with the ``MAKE_AE(<AnnotName>)`` macro, that exports the entry point.
+
+The three methods that we overwrite implement the functionalities of the annotator:
+
+	- ``initialize`` : gets called in the constructor of the class. Has the same functionalities as a constructor. We can read in the parameters defined in the xml descriptor here (in the tutorial code this is *test_param*).
+	- ``destroy`` :  It's like a destructor of a class, e.g. deallocate memory, if needed. 
+	- ``process`` :  this is where all the processing code goes. In the tutorial we convert the cas to the SceneCas, get the point cloud that we stored in it and display it's size
+
+.. note:: ``SceneCas`` is a wrapper for the uima::CAS class from uimacpp for conveniently setting and getting data. 
+
+
+You can now compile it with catkin_make or catkin build (we recommend using ``catkin-tools``.
+
+
+Add it to an AE and run
+-----------------------
+
+In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.yaml to our poroject and renamed it to ``my_demo.yaml``. Open it and add your new annotator to the pipeline by adding it to the fixed flow:
+   
+Run the pipeline as described in :doc:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
+
+.. note:: It is recommended to create you own launch file in the current package. Notice that you have to change the arguments of the ros node in the launch file in order to execute your new pipeline( from demo to my_demo)
+
+.. warning:: The annotators execute in the order they are defined in the fixed flow. Since the demo annotator accesses point clouds it needs to be put after the ImagePreprocessor component, since this is the module that creates the point cloud from the depth and rgb images. 
+
+The output in the terminal should look like this::
+
+   MyFirstAnnotator.cpp(40)[process] process start
+   MyFirstAnnotator.cpp(44)[process] Test param =  0.01
+   MyFirstAnnotator.cpp(47)[process] Cloud size: 307200
+   MyFirstAnnotator.cpp(48)[process] took: 2.37502 ms.
+
+
+4. Logging Results
+===============
+
+One particularly useful feature in RoboSherlock is the logging of results and that of the raw data into a database, for later inspection. You will create a new pipeline (aggregate analysis engine) that 
+stores raw data from the bag file in a mongodb, then modify the same AE, to read the data out of the database, process it, and store the results back in the database. 
+
+We will run an AE for storing the scenes in a mongoDB and modify the ``my_demo.yaml`` from the previous tutorials to read data from the database instead of listening ROS topics. To store the images in a database run the following::
+
+  rosrun robosherlock run _ae:=storage
+  rosbag play test.bag
+
+When the bagfile finishes playing stop the RoboSherlock instance and inspect the results in the database. The easiest way to do this is using a common tool like `RoboMongo <http://www.robomongo.org>`_ . Alternatively you can use the terminal tool that comes with mongodb. Start the mongo shell::
+
+	mongo
+
+Specify the database you want to use (the default database in RoboSherlock is Scenes)::
+	
+	use Scenes
+  
+Print the name of the collections that were created:: 
+
+	show collections
+	
+There should be seven collection in the Scenes database::
+
+	camera_info
+	camera_info_hd
+	cas
+	color_image_hd
+	depth_image_hd
+	scene
+	system.indexes
+
+The main collection is the cas, where the index of each document is the timestamp of the frame that got processed. Raw data (color and depth image) as well as the processed scenes (scene) are referenced from here using their respective objectID-s. We can view the content and the number of documents in it by running::
+
+	db.cas.find()
+	db.cas.find().count()
+	
+Since the pipeline you run only contained a CollectionReader, ImagePreprocessor and the StorageWriter, your ``scene`` collection is going to be empty, and the database essentially only contains the raw images, and the camera info.
+
+Even though the ImagePrepocessor component creates a point cloud, by default these are not stored in the database out of storage space considerations. Storing them can be enabled though by adding the keyword ``cloud`` to the ``enableViews`` parameter of the ``StorageWriter.yaml`` located in ``{..}/robosherlock/descriptors/annotators/io``. However, changing the default parameters is not recommended, instead you can overwrite them in the AE definition.
+
+
+It is not very convenient to always have to play a bag file in order to get data just for testing. Now that you have the raw data stored in the database, you can easily read it out from there, and execute pipelines on it. Modify your previous AE (my_demo.xml) to make it read from a database instead of listening to topics, and add a StorageWriter to the end of the pipeline it defines to store all results. 
+
+Readin raw data in RoboSherlock is handled by the CollectionReader. The config file for CollectionReader (located in ``descriptors/annoators/io``) looks like this
+
+.. code-block:: yaml
+  :emphasize-lines: 6
+  
+  annotator:
+    name: CollectionReader
+    implementation: rs_CollectionReader
+    description: 'Uses Camera Bridges, as available, to fill the cas with sensor data.'
+  parameters:
+    camera_config_files: ['config_kinect_robot.ini']
+  capabilities:
+    outputs: ['rs.cv.Mat']
+
+The collection reader takes a single paramteter (highlighted above), which ironically is a list of config files (this interface is due to change in future releaseses). This is becaus the CollectionReader can handle multiple input sources and they take different params. For example to read data from a camer we use the ROS interfaces (image and cam infor topics + TF locations), on the other hand reading from a database requires the name of the database. These config files can be defined in the ``config`` folder of any ROS package depening on RoboSherlock. Let's create one that reads from the previously stored database, by copying over an existing one from the core package::
+
+    roscd rs_tutorial
+    mkdir config
+    cp $(rospack find robosherlock)/config/config_mongodb_playback.ini ./config/config_mongodb_example.ini
+
+The content of the config file is the following::
+
+    [camera]
+    interface=MongoDB ->specifies the interface so COllectioReader knows which bridge to instantiate
+    [mongodb]
+    host=localhost ->IP of machine hosting the db
+    db=Scenes -> database name
+    continual=false ->if reached the last entry wait for new ones
+    loop=true -> if reached the last entry start from beginning
+    playbackSpeed=0.0 ->try to control the rate at which images are read in
+    [tf]
+    semanticMap=semantic_map.yaml
+    
+Now modify ``my_demo.xml``. First change the interface the CollectionReader uses. To do this by overwrite the parameter ``camera_config_files`` from the ``CollectionReader.yaml``. The variable is already overwritten in your ``my_demo.xml``, so simply change the value of it. Add a StorageWriter to the end of the fixed flow so you can save the restults of the pipeline. This time let's store the data in a DB called ``ScenesAnnotated``. To do this the ``storagedb`` param of ``StorageWriter`` needs to be overwritte. ``my_demo`` should look like this now (changes made to it are highlighted:
+
+.. code-block:: yaml
+   :emphasize-lines: 15, 17-19
+      
+      ae:
+	name: my_demo
+      fixedflow:
+	- CollectionReader
+	- ImagePreprocessor
+	- PointCloudFilter
+	- NormalEstimator
+	- PlaneAnnotator
+	- ImageSegmentationAnnotator
+	- PointCloudClusterExtractor
+	- ClusterMerger
+	- Cluster3DGeometryAnnotator
+	- MyFirstAnnotator
+	- DrawResultImage
+	- StorageWriter
+      CollectionReader:
+	camera_config_files: ['config_mongodb_example.ini']
+      StorageWriter:
+	storagedb: 'ScenesAnnotated'
+
+Run the modified pipeline, no need to play the bagfile anymore::
+
+  rosrun robosherlock run _ae:=my_demo 
+  
+Notice that the execution will continue to loop and never stop. This is because the configuration file for playing back data from the mongo database is set to loop infinitely. You can stop execution by selecting one of the visualizer windows and hit escape, or from the terminal using ``Ctrl+C``. 
+
+    
+Inspect the results in the mongodb. Optionally you can turn off looping in the configuration file, so execution halts once all frames have been processed::
+
+    mongo
+    show dbs
+    use ScenesAnnotated
+    db.scenes.find() 
+    
+
+
+*******************************
 Adapting capabilities to a task
--------------------------------
+*******************************
 
 Now that you have seen how to run a pipeline, and how to modify it, let's see how can you create a system that is task dependent. We start with inspectin results and extracting data from the logs with the purpose of retraining detection components. 
 
@@ -124,7 +478,7 @@ If the web app from the preovious section is still running stop it. Launch knowr
 
     roslaunch rs_run_configs json_prolog_and_rosbridge.launch 
     
-This launches the json prolog interface to knowrob and all web frontend for interacting with RoboSherlock; You are going to be using the RS live tab of the web interface for this part of the tutorial. Fir the interactive visualization and query interface to work we need to start RoboSherlock using roslaunch. Copy one over from ``rs_run_configs`` and edit it so it launches ``my_demo.yaml``::
+This launches the json prolog interface to knowrob and all web frontend for interacting with RoboSherlock; You are going to be using the RS live tab of the web interface for this part of the tutorial. For the interactive visualization and query interface to work we need to start RoboSherlock using roslaunch. Copy one over from ``rs_run_configs`` and edit it so it launches ``my_demo.yaml``::
 
     roscd rs_tutorial
     mkdir launch
