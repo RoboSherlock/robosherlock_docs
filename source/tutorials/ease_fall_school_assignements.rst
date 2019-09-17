@@ -9,6 +9,26 @@ RoboSherlock Tutorial: EASE Fall School
 Introduction to RoboSherlock
 ****************************
 
+Befor you start update the docker image and make sure you have a container running::
+
+    docker pull robosherlock/rs_interactive
+
+If you did not have the latest image and you already have a container running stop it and restart it.
+
+Cherk for a running container::
+  
+    docker ps -a
+    
+If you need to restart it execute the following::
+
+    docker stop rs_demo
+    docker rm rs_demo
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -v ${HOME}/sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
+
+Open a terminal in your web browser::
+
+    localhost:3000
+
 RoboSherlock is a ROS package, and uses ROS to interface with other components of a robotic system. Before you begin let's set up a new ROS workspace. 
 
 
@@ -39,14 +59,9 @@ Make sure to add it to your ``bashrc`` so that terminals that you open in the fu
 2. Create your own catkin-robosherlock package
 ==============================================
 
-Let's create a new package called ``rs_tutorial``. Make sure you are in the source folder of a catkin workspace and run::
+Let's create a new package called ``rs_tutorial``. Make sure you are in the source folder of the newly created catkin workspace and run::
 
     rosrun robosherlock rs_create_package rs_tutorial
-
-
-or if you've added the ``scripts`` folder to your PATH simply run::
-    
-    rs_create_package rs_tutorial
 
 The script will create a new catkin package that has the structure needed for Robosherlock.::
 
@@ -89,67 +104,85 @@ The first part sets the five CMake variables that are in turned used by the scri
 	
 	* generate_type_system: checks if we have newly defined types in the xml descriptions and generates the C++ container classes for them
 	
-You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. If you want ``rs_tutorial`` to depend on other robosherlock packages add them to the ``package.xml`` and ``CMakeLists.txt``.
+You can now add your custom annotators and pipeline analysis engines that can use any component defined in the RoboSherlock core package. If you want ``rs_tutorial`` to depend on other robosherlock packages add them to the ``package.xml`` and ``CMakeLists.txt``. We will do this in a later step. 
 
 
 3. Running a pipeline in RoboSherlock
 =====================================
 
+.. This tutoial assumes that you have followed the tutorial on :ref:`creating a new robosherlock package <create_your_rs_catkin_pkg>`.
 
-This tutoial assumes that you have followed the tutorial on :ref:`creating a new robosherlock package <create_your_rs_catkin_pkg>`.
-It introduces users to the components of the framework, and how to use them. Download the provided :download:`sample bag file <../_static/test.bag>`. If you are following the docker tutorial you will find the bagfile in ``~/data/`` folder.  The bagfile was recorded using a PR2 robot and contains a short stream of kinect data, namely the topics (check with ``rosbag info``): ::
+Let's first look at the main components of the framework, and how to use them. The docker image comes with a simple example data. Download the provided. You will find the bagfile in ``~/data/`` folder.  The bagfile was recorded using a PR2 robot and contains a short stream of kinect data, namely the topics (check with ``rosbag info``): ::
   
     /kinect_head/rgb/image_color/compressed
     /kinect_head/depth_registered/comressedDepth
     /kinect_head/rgb/camera_info
     /tf
 
-Tf is needed to get the transformation between camera frame and map or robot base. This feature can be turned off in the camera configuration files.
+TF is needed to get the transformation between camera frame and map or robot base. This feature can be turned off in the camera configuration files.
 
-Perception pipelines in RoboSherlock are defined as analysis_engines in the ``descriptor/analysis_engines`` folder of any robosherlock package. The core robosherlock package offers an executable called ``run`` that we can use to run any of these pipelines. To see how this work try and run the ``demo`` pipeline from robosherlock::
+Perception pipelines in RoboSherlock are defined as aggregate analysis engines in the ``descriptor/analysis_engines`` folder of any robosherlock package. The core robosherlock package offers an executable called ``runAAE`` that we can use to run any of these pipelines. 
+To see how this work we have prepared an example launch file in the ``rs_ease_fs`` package caleld ``ease_fs_demo.yaml``. Try and run the aggregate analysis engine from robosherlock. Start a roscore and in a second terminal launch the AAE execution:: 
     
-    rosrun robosherlock run _ae:=demo
+    roscore
+    roslaunch rs_ease_fs rs.launch
     
-This will initialize active components of RoboSherlock and will wait for data to be published on the camera topics. The executable takes several rosparams as input, one of them being the name of the analysis engine we want to execute. To see more options run with ``--help`` option. For now just use the default parameters.  To actually process some images we will need some data. Start the bagfile: ::    
+This will initialize active components of RoboSherlock and will wait for data to be published on the camera topics. The executable takes several rosparams as input, one of them being the name of the aggregate analysis engine we want to execute. To see more options run with ``--help`` option. For now just use the default parameters.  To actually process some images we will need to play the bagfile. Since it is only five seconds long loop it::    
     
-    rosbag play test.bag --loop
+    rosbag play ${HOME}/data/example.bag --loop
    
-You should see the results of the individual annotators in the visualizer windows (one for the colored image and one for the generated point clouds). If you don't see a visualizer window try turning visualization on by stopping the node and restarting it with the ``_vis:=true`` option (depending on how you started the docker container this might not work, but don't worry, we have other ways of seeing the results).
+You can look at the results of the individual annotators using the browsed and visualizer page. Go to ``localhost:8081`` where you should see the following: 
 
-Pressing left or right in the point cloud viewer (n or p in the image viewer) will change the view and show results of individual annotators. You should see an output similar to the one below:
+    .. image:: ../imgs/ease_fs/localhost_8081.png
+      :align: center
+      :height: 20pc
+    ..    :width: 100pc
 
-.. image:: ../imgs/demoResults.png
-   :align: center
-   :height: 20pc
-..    :width: 100pc
+Choose output image and the segmentation results should appear:
 
-The demo is a very simple example of how perception pipelines are defined and run in RoboSherlock. The definition of the pipeline is located in 
-*./descriptors/analysis_engines/demo.yaml*. Contents of it are the following
+    .. image:: ../imgs/ease_fs/rs_output_image.png
+      :align: center
+      :height: 20pc
+    ..    :width: 100pc
+
+In order to view the results of the individual annotators, that make up the pipeline, we have created two commands  for swiching: ``rs_next`` and ``rs_prev``. Execute these commands in a terminal window and see the results in the visualization tab:
+
+    .. image:: ../imgs/ease_fs/rs_next.png
+      :align: center
+      :height: 20pc
+    ..    :width: 100pc
+
+
+The demo is a very simple example of how perception pipelines are defined and one way of running them in RoboSherlock. The definition of the pipeline is located in 
+*rs_ease_fs/descriptors/analysis_engines/demo.yaml*. Contents of it are the following:
 
 .. code-block:: yaml
    
     ae: # -> various meta data	
-        name: demo
+        name: ease_fs_demo
     fixedflow: # -> the fixedflow a.k.a the perception algorithms, i/o components etc.
         - CollectionReader
         - ImagePreprocessor
         - PointCloudFilter
         - NormalEstimator
         - PlaneAnnotator
-        - ImageSegmentationAnnotator
         - PointCloudClusterExtractor
         - ClusterMerger
     CollectionReader: # parameter overrides for annotators
-        camera_config_files: ['config_kinect_robot.ini']
+        camera_config_files: ['config_kinect_robot_ease_fs.ini']
 
-.. A detailed presentation of each component can be found on the :ref:`annotation descriptions <annotators>`
-.. 
-Let's modify this pipeline. For this let's make a copy of it in ``rs_tutorial/descriptors/analysis_engines/``, and call it ``my_demo.yaml``.
+        
+Let's modify this pipeline. For this, make a copy of it in ``rs_tutorial/descriptors/analysis_engines/``, and call it ``my_demo.yaml``::
 
-If run without pipeline planning, the order in the fixed flow is extremely important. Try to add *Cluster3DGeometryAnnotator* before *PlaneAnnotator* and run the pipeline. Now add it after the *ClusterMerger* and relaunch RoboSherlock (no compilation required).
-You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the output in the terminal for the results).
-.. 
-If you are running in docker and you don't have a visualization add *DrawResultImage* to the end of your pipeline, and restart RoboShelrock. It will save images to the workdir for each processed scene.
+    cp ~/rs_ws/src/rs_ease_fs/descriptors/analysis_engines/ease_fs_demo.yaml  ~/demo_ws/rs_tutorial/descriptors/analysis_engines/my_demo.yaml
+
+
+Now let's adda a new annotator to the pipeline, called *Cluster3DGeometryAnnotator*. Simply add a new entry to the list under the **fixedflow** tag.  Since the launch file you are starting simply executes whatever it finds under the ``fixedflow``, the order of algorithms is important. Try to add *Cluster3DGeometryAnnotator* before *PlaneAnnotator* and run the pipeline. You can specify the newly created yaml using a parameter for the launch file::
+
+     roslaunch rs_ease_fs rs.launch ae:=my_demo
+
+
+If you check the terminal output or the visualization of this annotator you should see no results. This is because no hypotheses have been generated in the pipeline yet. Now add it after the *ClusterMerger* and relaunch RoboSherlock (no compilation required). You will now have the estimated 3D bounding box with a pose estimate for each cluster (search the output in the terminal for the results). 
 
 
 4. Write your own Annotator

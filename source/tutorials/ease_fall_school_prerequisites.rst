@@ -28,7 +28,7 @@ On the host machine create a folder that will be shared with the docker containe
     
 To start the a container you will need to execute docker run with a couple of parameters (mainly port forwarding). Alternatively you can simply forward all ports (might conflict with existing software on your system though)::
 
-    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -v ./sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -v ./sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
     
 The ``-d`` option tells docker to run the container as a daemon, you will have to wait for a few seconds until everything launches. Make sure to give the correct path to the ``sandbox`` folder on the host PC. To check that running the container was successful open a browser (Firefox was tested to work, other browsers might have issues), and go to::
 
