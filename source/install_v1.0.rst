@@ -1,7 +1,7 @@
-.. _install_devel_rs:
+.. _install_v1.0:
 
 ================================
-Install and Setup (devel branch)
+Install and Setup (v1.0)
 ================================
 
 The recommended operating system is Ubuntu 16.04 LTS. *RoboSherlock* comes as a ROS stack, so you will need to install **ROS Kinetic** (desktop full). Installation instructions can be found on the ROS homepage_ and setup a catkin workspace as described here_.
@@ -12,7 +12,11 @@ The recommended operating system is Ubuntu 16.04 LTS. *RoboSherlock* comes as a 
 
 These instructions are valid for the **devel branch** of the core package of RoboSherlock which you can get from the GitHub page: ::
 
-    git clone https://github.com/RoboSherlock/robosherlock -b devel --recursive
+    git clone https://github.com/RoboSherlock/robosherlock
+    cd robosherlock
+    git checkout tags/v1.0.0 -b v1.0.0
+    git submodule init
+    git submodule update    
    
 Check out the repository into your catkin workspace. Before compiling you need to set up the dependencies for the project. 
 
