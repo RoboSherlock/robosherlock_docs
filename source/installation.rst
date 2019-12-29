@@ -12,7 +12,7 @@ The recommended operating system for building RoboSherlock is Ubuntu 16.04 or Ub
 .. _homepage: http://wiki.ros.org/ROS/Installation
 .. _here: http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
-These instructions are valid for the current **master or kinetic branches** of the core package of RoboSherlock which you can get from the GitHub page. For previous versions see below. Go to your catkin workspace's **src** folder and check out the repository. 
+These instructions are valid for the current **melodic or kinetic branches** of the core package of RoboSherlock which you can get from the GitHub page. For previous versions see below. Go to your catkin workspace's **src** folder and check out the repository. 
 
 For **ROS Kinetic** run:: 
 
@@ -20,7 +20,7 @@ For **ROS Kinetic** run::
 
 If you are using **ROS Melodic** check out the master branch:: 
 
-    git clone https://github.com/RoboSherlock/robosherlock
+    git clone https://github.com/RoboSherlock/robosherlock -b meldic
 
 Install the dependencies::
 
@@ -55,6 +55,13 @@ Knowrob: Follow the official installation guide for the Knowrob Installation, wh
 
 Check out :ref:`write_queries` for details about how to use the query-answering.
 
+
+Contributing
+------------
+
+The melodic and kinetic branches are there only for releasing and mainting a stable version. To contribute to the project use the master branch. Changes made to the master will periodically be merged into the release branches. Fork the repository on github, create a new branch based on master, make your changes and open a pull request.  Direct changes to the release branches will only be merged if they are specific to a that release. 
+
+To compile the master branch you might need to install dependencies manually, since a common package.xml can not be maintained for both distributions.
 
 
 Previous versions
