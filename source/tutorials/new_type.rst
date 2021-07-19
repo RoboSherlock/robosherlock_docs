@@ -93,15 +93,15 @@ Using it in the code
 Now that a new type has been created, you can start using it from the annotators. For this purpose we will edit the source code of ``MyFirstAnnotator``. Add these lines to the ``process`` function::
 
     rs::Scene scene = cas.getScene();
-    std::vector<rs::Cluster> clusters;
+    std::vector<rs::ObjectHypothesis> clusters;
     scene.identifiables.filter(clusters);
     int idx = 0;
     for (auto cluster:clusters)
     {
-        rs::Cluster &c = cluster;
+        rs::ObjectHypothesis &c = cluster;
         pcl::PointIndices indices;
         rs::conversion::from(((rs::ReferenceClusterPoints)c.points()).indices(),indices);
-        outInfo("Cluster has "<<indices.indices.size()<<" points");
+        outInfo("ObjectHypothesis has "<<indices.indices.size()<<" points");
         
         Eigen::Vector4d pCentroid;
         pcl::compute3DCentroid(*cloud_ptr,indices, pCentroid);
@@ -126,7 +126,7 @@ Compile and run. If you have not modified your analysis engine nothing will happ
   c.annotations.filter(testAnnotations);
   if(testAnnotations.empty())
     continue;
-  outInfo("Cluster "<<idx-1<<" has "<<testAnnotations.size()<<" annotation of type MyFirstAnnotation");
+  outInfo("ObjectHypothesis "<<idx-1<<" has "<<testAnnotations.size()<<" annotation of type MyFirstAnnotation");
   outInfo("ID is: "<<testAnnotations[0].clusterId() );
   outInfo("x="<<testAnnotations[0].centroid().x());
   outInfo("y="<<testAnnotations[0].centroid().y());
