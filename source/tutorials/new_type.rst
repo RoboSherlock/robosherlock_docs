@@ -10,7 +10,7 @@ Adding the new type
 Go to the newly created ``rs_test`` package and navigate to the upper mentioned folder::
 	
   roscd rs_test
-  cd descriptrs/typesystem
+  cd descriptors/typesystem
 
 Here you will find a file called ``all_types.xml``. Don't pay attention to this file yet. We'll get back to it later. Create a new xml file where your new types are going to reside::
 
@@ -120,7 +120,14 @@ Don't forget to include the necessary header files::
    #include <rs_test/types/all_types.h>
    #include <pcl/common/centroid.h>
 
-Compile and run. If you have not modified your analysis engine nothing will happen. That is because the ``MyFirstAnnotator`` is placed right after the ``ImagePreprocessor`` in ``my_demo.xml``. Move it down right after the ``ClusterMerger`` node. Run it now. You will see it outputting the number of points in each cluster it found. The annotator will store each clusters centroid as an annotation of our new type, allowing the retrieval of it from other components. For the sake of simplicity we will retrieve it from within the same annotator. Before the for loop ends add the following lines and recompile::
+Open the CMakeLists.txt of your rs_tutorial package and add the new rs_test package as a dependency.
+This is done by looking for the "find_package" line and adding rs_test as an additional package there.
+If you don't do this step, you might get errors that the rs_test/types/all_types.h can't be found.
+You should also add rs_test to the package.xml of rs_tutorial to also declare the dependency there.
+
+Now Compile and run.
+
+If you have not modified your analysis engine nothing will happen. That is because the ``MyFirstAnnotator`` is placed right after the ``ImagePreprocessor`` in ``my_demo.xml``. Move it down right after the ``ClusterMerger`` node. Run it now. You will see it outputting the number of points in each cluster it found. The annotator will store each clusters centroid as an annotation of our new type, allowing the retrieval of it from other components. For the sake of simplicity we will retrieve it from within the same annotator. Before the for loop ends add the following lines and recompile::
 
   std::vector<rs_test::MyFirstAnnotation> testAnnotations;
   c.annotations.filter(testAnnotations);
