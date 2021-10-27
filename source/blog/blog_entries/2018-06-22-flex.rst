@@ -27,7 +27,7 @@
 
    Executing query ``{"detect":{"color":"red", "shape":"flat"}}`` will produce the result below:
 
-   .. image:: imgs/orderings.png
+   .. image:: /blog/imgs/orderings.png
        :align: center
        :height: 300px
        :width: 150px

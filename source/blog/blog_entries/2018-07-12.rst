@@ -35,12 +35,12 @@
     I implemented SSD detection annotator and FCIS instance segmentation annotator.
     The result are shown as below.
     
-    .. image:: ../imgs/ssd_robosherlock.png
+    .. image:: /imgs/ssd_robosherlock.png
  	:align: center
         :height: 100pc
         :width: 100pc
 
-    .. image:: ../imgs/fcis_robosherlock.png
+    .. image:: /imgs/fcis_robosherlock.png
  	:align: center
         :height: 100pc
         :width: 100pc

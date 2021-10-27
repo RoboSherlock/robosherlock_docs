@@ -2,7 +2,7 @@
 
 	The reference paper presenting the ideas behind RoboSherlock :cite:`2015:beetz` received the Best Service Robotics Paper Award and was finalist for the Best conferenc Paper Award at ICRA'15 in Seattle, USA.
 	
-	.. image:: imgs/2015-icra-robosherlock-paper-award.png
+	.. image:: /blog/imgs/2015-icra-robosherlock-paper-award.png
 		:align: center
 		:height: 100pc
 		:width: 100pc
