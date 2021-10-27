@@ -10,6 +10,8 @@ As described in the :ref:`overview<overview_rs>`, analysis engines can be either
 
 .. note:: it is not required that all primitive analysis engines annotate a scene, but for simplicity we call individual experts annotators. E.g. primitive AEs can generate object hypotheses, or have I/O tasks
 
+.. note:: Before you follow the next steps, make sure that you have 1) built your workspace after you have created the  :ref:`rs_tutorial<create_your_rs_catkin_pkg>` package and 2) sourced your catkin workspace.
+
 Create your annotator
 ---------------------
 
@@ -27,7 +29,7 @@ Every component in RoboSherlock is a  C++ library, that gets loaded during runti
 The yaml descriptor
 -------------------
 
-Confgiruations (meta definitions) of annotators are defined for every annotator in ``yaml`` files located in the ``<package_name>/descriptors/annotators`` folder. The annotator thatwe just created has the following configuration file:
+Confgiruations (meta definitions) of annotators are defined for every annotator in ``yaml`` files located in the ``<package_name>/descriptors/annotators`` folder. The annotator that we just created has the following configuration file:
 
 .. code-block:: yaml
     
@@ -115,7 +117,7 @@ You can now compile it with catkin_make or catkin build (we recommend using ``ca
 Add it to an AE and run
 -----------------------
 
-In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.yaml to our poroject and renamed it to ``my_demo.yaml``. Open it and add your new annotator to the pipeline by adding it to the fixed flow:
+In the previous  :ref:`tutorial <create_your_rs_catkin_pkg>` we copied over the demo.yaml to our project and renamed it to ``my_demo.yaml``. Open it and add your new annotator to the pipeline by adding it right after the ``ImagePreprocessor`` in the fixed flow list.
    
 Run the pipeline as described in :doc:`pipeline`. Look at the output in your terminal. There should be an output with the value of the test parameter, and the number of points in the point cloud. 
 
