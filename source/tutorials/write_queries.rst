@@ -4,6 +4,8 @@
 Use queries to control the pipeline
 ===================================
 
+**Deprecated**
+
 This tutorial assumes that the reader has followed the installation guide, which can be found here :ref:`install_rs`, including the installation of the query-answering dependencies. The reader should also have started RoboSherlock, downloaded the bag file available in the :ref:`first tutorial<pipeline>` and loaded the bagfile into the MongoDB as described in the :ref:`tutorial about logging results<mongodb>`. 
 
 Before using queries in robosherlock, json_prolog needs to be started as follows.::

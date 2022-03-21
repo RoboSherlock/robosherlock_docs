@@ -1,0 +1,3 @@
+.. colorbox:: 2020.10.06 EASE Milestone Demonstration
+
+  In an extensive demo scenario, the PR2 robot of the EASE CRC demonstrated a large variety of manipulation actions in a household environment. A commented video of the demonstration can be seen here: https://www.youtube.com/watch?v=pv_n9FQRoZQ . RoboSherlock and RobotVQA provide the perception methods for the demo to enable the detection and pose estimation of objects in even challenging configurations.

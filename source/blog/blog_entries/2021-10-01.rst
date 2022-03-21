@@ -1,0 +1,3 @@
+.. colorbox:: 2021.10.01 Best Paper Award for a RoboSherlock paper
+
+  Our paper entitled "Imagination-enabled Robot Perception" won this years IROS Best Paper Award on Cognitive Robotics. In this work we are proposing a game engine based belief state extension to RoboSherlock, which enables robots to reason about perception beliefs by providing methods to compare a realistic rendering of the estimated belief with the observed sensor data.

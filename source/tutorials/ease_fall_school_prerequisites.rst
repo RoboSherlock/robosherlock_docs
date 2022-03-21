@@ -1,7 +1,7 @@
 ..  _ease_fall_school_prerequisites:
 
 =====================================================
-Prerequisietes for EASE Fall School hands on tutorial
+Prerequisites for EASE Fall School hands on tutorial
 =====================================================
 
 Linux is the recommended OS, since the instructions here were tested under Ubuntu 16.04 and Ubuntu 18.04. Although, since you will be using using docker, it should work on any OS.

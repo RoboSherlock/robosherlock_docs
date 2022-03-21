@@ -663,7 +663,7 @@ These options tell RoboSherlock to wait with the execution of a pipeline until a
     
 Notice how on the last lines of the terminal output it is going to complain about *MyFirstAnnotator* and *MySecondAnnotator* not existing in the knowledge base. Don't worry about this for now. You will fix it later on. 
 
-Got to the web interface and execute the detection queries. The detection queries are based on the *detect* Prolog rule. This is just an interface query to the ROS interface of RoboShelrock, which is in json format. ``an object`` is just eye-candy in these queries, but it can not be ommitted. The queries are simple key-value pair specifications::
+Got to the web interface and execute the detection queries. The detection queries are based on the *detect* Prolog rule. This is just an interface query to the ROS interface of RoboSherlock, which is in json format. ``an object`` is just eye-candy in these queries, but it can not be ommitted. The queries are simple key-value pair specifications::
 
   detect([an, object, [shape, box]]).
 

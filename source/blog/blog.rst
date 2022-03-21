@@ -1,6 +1,10 @@
 News and Blog
 =============
 
+.. include:: blog_entries/2021-10-01.rst
+
+.. include:: blog_entries/2020-10-06.rst
+
 .. include:: blog_entries/2018-08-11.rst
 
 .. include:: blog_entries/2018-08-01.rst
