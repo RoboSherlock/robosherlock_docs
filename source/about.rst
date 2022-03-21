@@ -9,13 +9,13 @@ RoboSherlock is developed at the `Institute for Artificial Intelligence`_, Unive
 
 Core Developers:
   * Vanessa Hassouna (hassouna[AT]cs.uni-bremen.de)
-  * Franklin Kenghagho Kenfack (fkenghag[AT]@uni-bremen.de)
-  * Patrick Mania (pmania[AT]@cs.uni-bremen.de)
+  * Franklin Kenghagho Kenfack (fkenghag[AT]uni-bremen.de)
+  * Patrick Mania (pmania[AT]cs.uni-bremen.de)
 
 Contributors:
-  * Dr. Ferenc Balint-Benczedi (balintbe[AT]@cs.uni-bremen.de)
-  * Jan-Hendrik Worch (jworch[AT]@cs.uni-bremen.de)
-  * Thiemo Wiedemeyer (wiedemeyer[AT]@cs.uni-bremen.de)
+  * Dr. Ferenc Balint-Benczedi (balintbe[AT]cs.uni-bremen.de)
+  * Jan-Hendrik Worch (jworch[AT]cs.uni-bremen.de)
+  * Thiemo Wiedemeyer (wiedemeyer[AT]cs.uni-bremen.de)
   * Nico Blodow
   * Zoltan-Csaba Marton
   * Christian Kerl
