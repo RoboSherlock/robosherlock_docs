@@ -12,7 +12,7 @@ We will run an AE for storing the scenes in a mongoDB and modify the ``my_demo.y
   rosrun robosherlock run _ae:=storage
   rosbag play test.bag
 
-When the bagfile finishes playing stop the RoboSherlock instance and inspect the results in the database. The easiest way to do this is using a common tool like `RoboMongo <http://www.robomongo.org>`_ . Alternatively you can use the terminal tool that comes with mongodb. Start the mongo shell::
+When the bagfile finishes playing stop the RoboSherlock instance and inspect the results in the database. The easiest way to do this is using a common tool like `Robo 3T <http://www.robomongo.org>`_ . Alternatively you can use the terminal tool that comes with mongodb. Start the mongo shell::
 
 	mongo
 
@@ -44,7 +44,7 @@ Since the pipeline you run only contained a CollectionReader, ImagePreprocessor 
 Even though the ImagePrepocessor component creates a point cloud, by default these are not stored in the database out of storage space considerations. Storing them can be enabled though by adding the keyword ``cloud`` to the ``enableViews`` parameter of the ``StorageWriter.yaml`` located in ``{..}/robosherlock/descriptors/annotators/io``. However, changing the default parameters is not recommended, instead you can overwrite them in the AE definition.
 
 
-It is not very convenient to always have to play a bag file in order to get data just for testing. Now that you have the raw data stored in the database, you can easily read it out from there, and execute pipelines on it. Modify your previous AE (my_demo.xml) to make it read from a database instead of listening to topics, and add a StorageWriter to the end of the pipeline it defines to store all results. 
+It is not very convenient to always have to play a bag file in order to get data just for testing. Now that you have the raw data stored in the database, you can easily read it out from there, and execute pipelines on it. Modify your previous AE (my_demo.yaml) to make it read from a database instead of listening to topics, and add a StorageWriter to the end of the pipeline it defines to store all results.
 
 Readin raw data in RoboSherlock is handled by the CollectionReader. The config file for CollectionReader (located in ``descriptors/annoators/io``) looks like this
 
@@ -79,7 +79,7 @@ The content of the config file is the following::
     [tf]
     semanticMap=semantic_map.yaml
     
-Now modify ``my_demo.xml``. First change the interface the CollectionReader uses. To do this by overwrite the parameter ``camera_config_files`` from the ``CollectionReader.yaml``. The variable is already overwritten in your ``my_demo.xml``, so simply change the value of it. Add a StorageWriter to the end of the fixed flow so you can save the restults of the pipeline. This time let's store the data in a DB called ``ScenesAnnotated``. To do this the ``storagedb`` param of ``StorageWriter`` needs to be overwritte. ``my_demo`` should look like this now (changes made to it are highlighted:
+Now modify ``my_demo.yaml``. First change the interface the CollectionReader uses. To do this by overwrite the parameter ``camera_config_files`` from the ``CollectionReader.yaml``. The variable is already overwritten in your ``my_demo.yaml``, so simply change the value of it. Add a StorageWriter to the end of the fixed flow so you can save the restults of the pipeline. This time let's store the data in a DB called ``ScenesAnnotated``. To do this the ``storagedb`` param of ``StorageWriter`` needs to be overwritte. ``my_demo`` should look like this now (changes made to it are highlighted:
 
 .. code-block:: yaml
    :emphasize-lines: 15, 17-19
