@@ -11,7 +11,7 @@ I. Introduction to RoboSherlock
 
 Befor you start update the docker image and make sure you have a container running::
 
-    docker pull robosherlock/rs_interactive
+    docker pull robosherlock/rs_interactive:fs2022
 
 If you did not have the latest image and you already have a container running stop it and restart it.
 
@@ -23,7 +23,7 @@ If you need to restart it, execute the following::
 
     docker stop rs_demo
     docker rm rs_demo
-    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -v ${HOME}/sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -p 9000:9000 -v ${HOME}/sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive:fs2022
 
 Open a terminal in your web browser::
 
@@ -630,6 +630,41 @@ You are ready to run ``my_demo`` again and inspect the results in the db using t
 ..  :height: 30pc
 
 Congrats, you just adapted the recognition capabilities of a robot based on it's episodic memories...sort of. Though the example is very simple the same techniques can be used to performs more complex tasks.  In the following we will take a look at how all of 	 can be used to answer queries that a robotic agent might ask. 
+
+II.3 Assumption-free scenes and multi-task experts
+--------------------------------------------------
+
+Notice that up to now the scenes you have been working with is simplistic, where there is no occlusion that makes object recognition and pose estimation difficult, but also there is a support plane that eases the extraction of clusters (i.e., object hypotheses or SoA). However, real world's scenes are much more complex than that (i.e., no support planes, occlusions, dynamicity). In this case, it becomes difficult to formalize the environment and leverage this formalization with primitive experts (i.e., traditional perception) to solve the problem. Therefore, the use of end-to-end approaches to learn from such chaotic scenes. In this section we present ``RobotVQA``, a deep learning-based multi-task expert in RoboSherlock that addresses the above problems.
+
+In order to demonstrate ``RobotVQA``, we will first change the target scene and therefore stop playing the actual bag file and play the following bag file::
+
+  rosbag play ${HOME}/data/example.bag -l -r 0.2
+  
+Then, stop robosherlock and replace the expert named ``RegionFilter`` from your pipeline by ``PointCloudFilter`` (while both have the same output, the former leverages the location of objects), then run robosherlock again. Your should receive the following segmentation result:
+
+.. image:: ../imgs/tutorials/rs_wrong_perception.png
+   :align: center
+   :width: 30pc
+..    :height: 30pc
+..    :width: 30pc
+
+
+Now, let replace the naive segmentation experts ``ClusterMerger`` and ``PointCloudClusterExtractor`` by ``SceneGraphAnnotator`` and run robosherlock again as follows::
+
+    roslaunch rs_ease_fs rs_dl.launch ae:=ease_fs_dl_demo
+
+
+
+.. image:: ../imgs/tutorials/robotvqa_perception.png
+   :align: center
+   :width: 30pc
+..    :height: 30pc
+..    :width: 30pc 
+
+
+After executing the above command, you should now receive the results above.
+
+.. note:: Notice that RobotVQA does not only work in assumption-free scenes but is also multi-task as it outputs the complete scene semantic graph (i.e., objects, their properties and relations among them). Moreover, this demonstrate the genericity of RoboSherlock as it can wrap any abitrary perception algorithm as long as the inputs and outputs meet the policies of RoboSherlock's type system. 
 
 ********************************************** 
 III. Knowledge integration and query answering
