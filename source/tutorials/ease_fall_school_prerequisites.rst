@@ -4,9 +4,11 @@
 Prerequisites for EASE Fall School hands on tutorial
 =====================================================
 
-Linux is the recommended OS, since the instructions here were tested under Ubuntu 16.04 and Ubuntu 18.04. Although, since you will be using using docker, it should work on any OS.
+Linux is the recommended OS, since the instructions here were tested under Ubuntu 16.04 and Ubuntu 18.04. Although, ``since you will be using using docker, it should work on any OS``.
 
 Throughout the tutorial you will be using a dockerized version of RoboSherlock. Docker is a virtualization tool, sort of like a virtual machine but not quite. For detail see the docker `homepage <https://docker.com>`_ or `wiki <https://en.wikipedia.org/wiki/Docker_(software)>`_
+
+.. warning:: Please note that as the framework keeps growing in features, so does also the docker image. Actually, the image is 19.8 GB big and requires around 20 min for installation. For this reason, we strongly recommend you to download the docker image before starting the tutorial.
 
 To install docker follow the instructions found here::
 
@@ -20,7 +22,7 @@ Specifically ensure that you do not need root access to run a docker container.
 
 Once docker is installed you can get the RoboSherlock image by opening a terminal and executing::
 
-    docker pull robosherlock/rs_interactive
+    docker pull robosherlock/rs_interactive:fs2022
     
 On the host machine create a folder that will be shared with the docker container::
 
@@ -28,7 +30,7 @@ On the host machine create a folder that will be shared with the docker containe
     
 To start the a container you will need to execute docker run with a couple of parameters (mainly port forwarding). Alternatively you can simply forward all ports (might conflict with existing software on your system though)::
 
-    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -v ./sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive
+    docker run -d -p 3000:3000 -p 8080:8080 -p 5555:5555 -p 9090:9090 -p 8081:8081 -p 9000:9000 -v ./sandbox:/home/rs/sandbox --name rs_demo robosherlock/rs_interactive:fs2022
     
 The ``-d`` option tells docker to run the container as a daemon, you will have to wait for a few seconds until everything launches. Make sure to give the correct path to the ``sandbox`` folder on the host PC. To check that running the container was successful open a browser (Firefox was tested to work, other browsers might have issues), and go to::
 
