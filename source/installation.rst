@@ -17,6 +17,7 @@ The following instructions are valid for the current **noetic**, **melodic or ki
 For **ROS Noetic** run::
 
     git clone https://github.com/RoboSherlock/robosherlock -b noetic --recursive
+    git clone https://github.com/ros-perception/image_transport_plugins.git -b noetic-devel # fixes problems with old depth image formats
 
 If you are using **ROS Melodic** run::
 
