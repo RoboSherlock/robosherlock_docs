@@ -138,21 +138,21 @@ This will initialize the components defined in the descriptor and wait for data 
    
 You can look at the results of the individual annotators using the browsed and visualizer page. Go to ``localhost:8081`` where you should see the following: 
 
-    .. image:: /imgs/localhost_8081.png
+    .. image:: /source/imgs/localhost_8081.png
       :align: center
       :height: 20pc
     ..    :width: 100pc
 
 Choose *output_image* topic and the segmentation results should appear:
 
-    .. image:: /imgs/rs_output_image.png
+    .. image:: /source/imgs/rs_output_image.png
       :align: center
       :height: 20pc
     ..    :width: 100pc
 
 In order to view the results of the individual annotators, that make up the pipeline, we have created two commands  for switching: ``rs_next`` and ``rs_prev``. Execute these commands in a terminal window and see the results in the visualization tab:
 
-    .. image:: /imgs/rs_next.png
+    .. image:: /source/imgs/rs_next.png
       :align: center
       :height: 20pc
     ..    :width: 100pc
@@ -405,7 +405,7 @@ Open ``my_demo.yaml`` and add your new annotator to the pipeline by adding it to
 
 In your output image you should see the pancake maker being detected, highlighted by a rectangle around it in the image:
 
-    .. image:: /imgs/result_my_first_annotator.png
+    .. image:: /source/imgs/result_my_first_annotator.png
       :align: center
       :height: 20pc
 
@@ -570,7 +570,7 @@ In a browser navigate to ``localhost:5555``. For now disregard the canvas and pr
 
 Click on Query and you should see the results from the database:
 
-.. image:: /imgs/object_store.png
+.. image:: /source/imgs/object_store.png
    :align: center
    :width: 30pc
 ..  :height: 30pc
@@ -624,7 +624,7 @@ Before running this, we are still missing one more step. ``my_demo`` does not co
 
 You are ready to run ``my_demo`` again and inspect the results in the db using the web interface. You should see that the objects are correctly classified. 
 
-.. image:: /imgs/knn_results.png
+.. image:: /source/imgs/knn_results.png
    :align: center
    :width: 30pc
 ..  :height: 30pc
